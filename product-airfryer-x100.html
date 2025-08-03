@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Air Fryer X100 - PowerCity Electronics</title>
+    <!-- Load Tailwind CSS for utility classes -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Link for Inter font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom CSS styles */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6; /* Light gray background */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Active brand button styling */
+        .brand-button.active {
+            background-color: #4a5568; /* Darker gray for active state */
+            color: #ffffff;
+        }
+
+        /* Image sizing and fitting */
+        .product-card img {
+            width: 100%; /* Ensure image takes full width of its container */
+            height: 200px; /* Consistent height for all images */
+            object-fit: contain; /* Changed from 'cover' to 'contain' to ensure the entire image is visible,
+                                    then fill remaining space with background if aspect ratio doesn't match */
+            background-color: #e2e8f0; /* Light gray background for image container when object-fit is 'contain' */
+            object-position: center; /* Center the image within its bounds */
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+    <!-- Header Section (simplified for product page) -->
+    <header class="bg-gray-800 text-white p-4 shadow-lg rounded-b-lg mb-8">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-3xl font-bold tracking-wide">Air Fryer X100 Details</h1>
+            <a href="powercity.html" class="text-lg font-medium hover:text-gray-300">Back to Home</a>
+        </div>
+    </header>
+
+    <!-- Main Content Section -->
+    <main class="container mx-auto p-4 flex-grow">
+        <h2 class="text-2xl font-semibold text-gray-800 mb-6 text-center">Explore Air Fryer Models by Brand</h2>
+
+        <!-- Brand Filter Buttons -->
+        <div class="flex flex-wrap justify-center gap-4 mb-8">
+            <button class="brand-button bg-gray-300 text-gray-800 py-2 px-6 rounded-lg font-semibold hover:bg-gray-400 transition duration-200 active" data-brand="Philips">Philips</button>
+            <button class="brand-button bg-gray-300 text-gray-800 py-2 px-6 rounded-lg font-semibold hover:bg-gray-400 transition duration-200" data-brand="Anex">Anex</button>
+            <button class="brand-button bg-gray-300 text-gray-800 py-2 px-6 rounded-lg font-semibold hover:bg-gray-400 transition duration-200" data-brand="Dawlance">Dawlance</button>
+            <button class="brand-button bg-gray-300 text-gray-800 py-2 px-6 rounded-lg font-semibold hover:bg-gray-400 transition duration-200" data-brand="Kenwood">Kenwood</button>
+        </div>
+
+        <!-- Product Display Grid -->
+        <!-- Changed grid columns to display 3 items per row on medium and large screens -->
+        <div id="product-display" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
+            <!-- Product cards will be dynamically loaded here by JavaScript -->
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="bg-gray-800 text-white p-4 mt-8 rounded-t-lg">
+        <div class="container mx-auto text-center text-sm">
+            <p>&copy; 2025 PowerCity Electronics. All rights reserved.</p>
+            <p>Designed with <span class="text-red-500">&hearts;</span> by Your Name/Company</p>
+        </div>
+    </footer>
+
+    <script>
+        // Data structure for products by brand
+        const brandProducts = {
+            Philips: [
+                { name: "Philips Essential Airfryer", price: "PKR 28,000", image: "https://th.bing.com/th/id/OIP.o_c0mIU8xIpQkAr7XBzolQHaHa?w=185&h=185&c=7&r=0&o=7&pid=1.7&rm=3" },
+                { name: "Philips TurboStar Airfryer", price: "PKR 35,500", image: "data:image/webp;base64,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" },
+                { name: "Philips XXL Digital Airfryer", price: "PKR 48,000", image: "data:image/webp;base64,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" },
+                { name: "Philips HD9200 Airfryer", price: "PKR 25,000", image: "https://th.bing.com/th/id/OIP.obWfsTrpVL1VfqM2nfgqJQHaHa?w=174&h=180&c=7&r=0&o=7&pid=1.7&rm=3" },
+                { name: "Philips Compact Airfryer", price: "PKR 22,000", image: "data:image/webp;base64,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" },
+                { name: "Philips Smart Sensing Airfryer", price: "PKR 52,000", image: "data:image/webp;base64,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" }
+            ],
+            Anex: [
+                { name: "Anex AG-2045 Air Fryer", price: "PKR 18,500", image: "https://placehold.co/400x300/9ca3af/ffffff?text=Anex+AF1" },
+                { name: "Anex AF-101 Digital Air Fryer", price: "PKR 22,000", image: "https://placehold.co/400x300/9ca3af/ffffff?text=Anex+AF2" },
+                { name: "Anex AX-1200 Smart Air Fryer", price: "PKR 19,999", image: "https://placehold.co/400x300/9ca3af/ffffff?text=Anex+AF3" },
+                { name: "Anex Super Air Fryer", price: "PKR 17,000", image: "https://placehold.co/400x300/9ca3af/ffffff?text=Anex+AF4" },
+                { name: "Anex Turbo Air Fryer", price: "PKR 21,000", image: "https://placehold.co/400x300/9ca3af/ffffff?text=Anex+AF5" },
+                { name: "Anex Smart Chef Air Fryer", price: "PKR 23,500", image: "https://placehold.co/400x300/9ca3af/ffffff?text=Anex+AF6" }
+            ],
+            Dawlance: [
+                { name: "Dawlance DW-AF12 Air Fryer", price: "PKR 20,000", image: "https://placehold.co/400x300/d1d5db/ffffff?text=Dawlance+AF1" },
+                { name: "Dawlance DigiFry Airfryer", price: "PKR 24,000", image: "https://placehold.co/400x300/d1d5db/ffffff?text=Dawlance+AF2" },
+                { name: "Dawlance Healthy Fryer", price: "PKR 21,500", image: "https://placehold.co/400x300/d1d5db/ffffff?text=Dawlance+AF3" },
+                { name: "Dawlance Pro Air Fryer", price: "PKR 26,000", image: "https://placehold.co/400x300/d1d5db/ffffff?text=Dawlance+AF4" },
+                { name: "Dawlance Compact Fryer", price: "PKR 19,000", image: "https://placehold.co/400x300/d1d5db/ffffff?text=Dawlance+AF5" },
+                { name: "Dawlance Digital Airfryer", price: "PKR 27,500", image: "https://placehold.co/400x300/d1d5db/ffffff?text=Dawlance+AF6" }
+            ],
+            Kenwood: [
+                { name: "Kenwood HFP30 Air Fryer", price: "PKR 29,000", image: "https://placehold.co/400x300/e5e7eb/ffffff?text=Kenwood+AF1" },
+                { name: "Kenwood KAB01 Air Fryer", price: "PKR 33,000", image: "https://placehold.co/400x300/e5e7eb/ffffff?text=Kenwood+AF2" },
+                { name: "Kenwood Chef Airfryer", price: "PKR 38,000", image: "https://placehold.co/400x300/e5e7eb/ffffff?text=Kenwood+AF3" },
+                { name: "Kenwood XXL Fryer", price: "PKR 45,000", image: "https://placehold.co/400x300/e5e7eb/ffffff?text=Kenwood+AF4" },
+                { name: "Kenwood Compact Airfryer", price: "PKR 27,000", image: "https://placehold.co/400x300/e5e7eb/ffffff?text=Kenwood+AF5" },
+                { name: "Kenwood Smart Air Fryer", price: "PKR 40,000", image: "https://placehold.co/400x300/e5e7eb/ffffff?text=Kenwood+AF6" }
+            ]
+        };
+
+        // Function to display products for a given brand
+        function displayProducts(brand) {
+            const productDisplay = document.getElementById('product-display');
+            productDisplay.innerHTML = ''; // Clear previous products
+
+            const products = brandProducts[brand];
+            if (products) {
+                products.forEach(product => {
+                    const productCard = `
+                        <div class="bg-white rounded-xl shadow-md overflow-hidden transform transition-transform duration-300 hover:scale-105 hover:shadow-xl">
+                            <!-- Image tag now uses the custom CSS class for sizing and object-fit -->
+                            <img src="${product.image}" alt="${product.name}" class="product-image">
+                            <div class="p-4">
+                                <h3 class="font-bold text-xl mb-2 text-gray-900">${product.name}</h3>
+                                <p class="text-gray-700 text-lg mb-4">${product.price}</p>
+                                <button class="w-full bg-gray-700 text-white py-2 px-4 rounded-lg font-semibold hover:bg-gray-900 transition duration-200">
+                                    In Stock
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                    productDisplay.innerHTML += productCard;
+                });
+            }
+        }
+
+        // Event listeners for brand buttons
+        document.addEventListener('DOMContentLoaded', () => {
+            const brandButtons = document.querySelectorAll('.brand-button');
+
+            brandButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remove 'active' class from all buttons
+                    brandButtons.forEach(btn => btn.classList.remove('active'));
+                    // Add 'active' class to the clicked button
+                    button.classList.add('active');
+                    displayProducts(button.dataset.brand);
+                });
+            });
+
+            // Display Philips products by default on load
+            displayProducts('Philips');
+        });
+    </script>
+</body>
+</html>
