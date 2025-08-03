@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <!-- Load Tailwind CSS for a clean, responsive layout -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Link for Inter font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom CSS to enable smooth scrolling behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Hover effect for project cards */
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Custom animation for section headings */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<!-- Updated body to a dark background and light text -->
+<body class="bg-gray-900 text-gray-200">
+
+    <!-- Header and Navigation -->
+    <!-- Updated header to match the new dark theme -->
+    <header class="bg-gray-800 shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-white">My Portfolio</a>
+            <div class="flex space-x-6">
+                <!-- Updated nav links for dark theme -->
+                <a href="#about" class="text-gray-400 hover:text-white transition-colors duration-300">About</a>
+                <a href="#projects" class="text-gray-400 hover:text-white transition-colors duration-300">Projects</a>
+                <a href="#skills" class="text-gray-400 hover:text-white transition-colors duration-300">Skills</a>
+                <a href="#contact" class="text-gray-400 hover:text-white transition-colors duration-300">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- About Section -->
+        <!-- Updated section background for dark theme -->
+        <section id="about" class="py-20 bg-gray-800">
+            <div class="container mx-auto px-6 flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 text-center md:text-left mb-8 md:mb-0">
+                    <h1 class="text-5xl font-bold text-white fade-in">Hello, I'm ZAINAB SHOAIB</h1>
+                    <p class="text-lg text-gray-300 mt-4 fade-in">I am a passionate Frontend Developer. Welcome to my personal portfolio where you can learn more about my work and skills.</p>
+                </div>
+                <div class="md:w-1/2 flex justify-center">
+                    <img src="https://m.media-amazon.com/images/I/31Cd9UQp6eL._UF1000,1000_QL80_.jpg" alt="Profile Picture" class="rounded-full w-64 h-64 shadow-lg object-cover">
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <!-- Updated section background for dark theme -->
+        <section id="projects" class="py-20 bg-gray-900">
+            <div class="container mx-auto px-6">
+                <h2 class="text-4xl font-bold text-center text-white mb-12 fade-in">My Projects</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Project Card 1: Powercity Website -->
+                    <!-- Updated project card background for dark theme -->
+                    <div class="bg-gray-800 rounded-xl shadow-md overflow-hidden transform transition duration-300 project-card">
+                        <img src="https://placehold.co/600x400/9ca3af/ffffff?text=PowerCity+Website" alt="Powercity Website" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-white mb-2">PowerCity Electronics</h3>
+                            <p class="text-gray-400">An electronics e-commerce product page showcasing various air fryer models from different brands, with a clean and responsive design.</p>
+                            <a href="https://zainab-shoaib09.github.io/loginn/power.html" class="mt-4 inline-block text-blue-500 hover:underline">View Project &rarr;</a>
+                        </div>
+                    </div>
+                    <!-- Project Card 2: My Candyland Website -->
+                    <!-- Updated project card background for dark theme -->
+                    <div class="bg-gray-800 rounded-xl shadow-md overflow-hidden transform transition duration-300 project-card">
+                        <img src="https://placehold.co/600x400/fecaca/ffffff?text=My+Candyland" alt="My Candyland Website" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-white mb-2">My Candyland</h3>
+                            <p class="text-gray-400">A colorful, responsive product page for a candy-themed store, using a separate CSS file for styling.</p>
+                            <a href="https://zainab-shoaib09.github.io/loginn/mycandyland.html" class="mt-4 inline-block text-blue-500 hover:underline">View Project &rarr;</a>
+                        </div>
+                    </div>
+                    <!-- Project Card 3: Toy Store Website -->
+                    <!-- Updated project card background for dark theme -->
+                    <div class="bg-gray-800 rounded-xl shadow-md overflow-hidden transform transition duration-300 project-card">
+                        <img src="https://placehold.co/600x400/4b5563/ffffff?text=Toy+Store" alt="Toy Store Website" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-white mb-2">Toy Store</h3>
+                            <p class="text-gray-400">A fun and colorful product page for a toy store, demonstrating front-end design principles.</p>
+                            <a href="https://zainab-shoaib09.github.io/loginn/toy.html" class="mt-4 inline-block text-blue-500 hover:underline">View Project &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Skills Section -->
+        <!-- Updated section background for dark theme -->
+        <section id="skills" class="py-20 bg-gray-800">
+            <div class="container mx-auto px-6">
+                <h2 class="text-4xl font-bold text-center text-white mb-12 fade-in">My Skills</h2>
+                <div class="flex flex-wrap justify-center gap-6">
+                    <!-- Updated skill tags for dark theme -->
+                    <span class="bg-gray-700 text-gray-200 font-semibold px-4 py-2 rounded-full transition duration-300 hover:bg-blue-500 hover:text-white">HTML5</span>
+                    <span class="bg-gray-700 text-gray-200 font-semibold px-4 py-2 rounded-full transition duration-300 hover:bg-blue-500 hover:text-white">CSS3</span>
+                    <span class="bg-gray-700 text-gray-200 font-semibold px-4 py-2 rounded-full transition duration-300 hover:bg-blue-500 hover:text-white">JavaScript</span>
+                    <span class="bg-gray-700 text-gray-200 font-semibold px-4 py-2 rounded-full transition duration-300 hover:bg-blue-500 hover:text-white">React</span>
+                    <span class="bg-gray-700 text-gray-200 font-semibold px-4 py-2 rounded-full transition duration-300 hover:bg-blue-500 hover:text-white">Tailwind CSS</span>
+                    <span class="bg-gray-700 text-gray-200 font-semibold px-4 py-2 rounded-full transition duration-300 hover:bg-blue-500 hover:text-white">Python</span>
+                    <span class="bg-gray-700 text-gray-200 font-semibold px-4 py-2 rounded-full transition duration-300 hover:bg-blue-500 hover:text-white">Git</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <!-- Updated section background for dark theme -->
+        <section id="contact" class="py-20 bg-gray-900">
+            <div class="container mx-auto px-6">
+                <h2 class="text-4xl font-bold text-center text-white mb-12 fade-in">Get In Touch</h2>
+                <!-- Updated form container for dark theme -->
+                <div class="max-w-xl mx-auto bg-gray-800 p-8 rounded-xl shadow-md">
+                    <form action="#" method="POST">
+                        <div class="mb-4">
+                            <!-- Updated label color for dark theme -->
+                            <label for="name" class="block text-gray-300 font-semibold mb-2">Name</label>
+                            <!-- Updated input styling for dark theme -->
+                            <input type="text" id="name" name="name" class="w-full px-4 py-2 rounded-lg border-gray-600 bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                        </div>
+                        <div class="mb-4">
+                            <!-- Updated label color for dark theme -->
+                            <label for="email" class="block text-gray-300 font-semibold mb-2">Email</label>
+                            <!-- Updated input styling for dark theme -->
+                            <input type="email" id="email" name="email" class="w-full px-4 py-2 rounded-lg border-gray-600 bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                        </div>
+                        <div class="mb-6">
+                            <!-- Updated label color for dark theme -->
+                            <label for="message" class="block text-gray-300 font-semibold mb-2">Message</label>
+                            <!-- Updated textarea styling for dark theme -->
+                            <textarea id="message" name="message" rows="5" class="w-full px-4 py-2 rounded-lg border-gray-600 bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500" required></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-blue-500 text-white font-bold py-3 px-4 rounded-lg hover:bg-blue-600 transition duration-300">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-6">
+        <div class="container mx-auto text-center px-6">
+            <p>&copy; 2025 ZAINAB SHOAIB. All Rights Reserved.</p>
+            <div class="mt-4 flex justify-center space-x-4">
+                <!-- Updated social links for dark theme -->
+                <a href="#" class="text-gray-500 hover:text-white transition duration-300">GitHub</a>
+                <a href="#" class="text-gray-500 hover:text-white transition duration-300">LinkedIn</a>
+                <a href="#" class="text-gray-500 hover:text-white transition duration-300">Twitter</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript for scroll-based animations
+        const fadeInElements = document.querySelectorAll('.fade-in');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        fadeInElements.forEach(element => {
+            observer.observe(element);
+        });
+    </script>
+</body>
+</html>
