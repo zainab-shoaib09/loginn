@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Toy Store - Home</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        /* General Styling and Reset */
+        :root {
+            --primary-color: #87CEEB; /* Light Sky Blue */
+            --primary-dark: #5F9EA0; /* Cadet Blue */
+            --accent-color: #FFD700; /* Gold for highlights */
+            --text-color: #333;
+            --light-text-color: #f4f4f4;
+            --background-color: #f8f8f8;
+            --border-color: #ddd;
+            --font-family: 'Poppins', sans-serif;
+            --header-bg: #fff;
+            --top-bar-bg: #f5f5f5; /* Lighter background for the very top bar */
+            --announce-bar-bg: #333; /* Darker background for announcement */
+            --secondary-nav-bg: #e0f2f7; /* Very light blue for secondary nav */
+            --free-shipping-bg: #ffe0b2; /* Light orange/yellow for free shipping */
+            --free-shipping-text: #e65100; /* Darker orange for text */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family);
+            line-height: 1.6;
+            color: var(--text-color);
+            /* --- UPDATED BACKGROUND IMAGE FOR BODY --- */
+            background-image: url('https://static.vecteezy.com/system/resources/previews/019/774/620/non_2x/toys-shop-background-vector.jpg');
+            background-size: cover; /* This will make the image cover the entire background */
+            background-repeat: no-repeat; /* Prevents the image from repeating */
+            background-position: center center; /* Centers the image */
+            background-attachment: fixed; /* Keeps the image fixed when scrolling */
+            /* You might want to adjust the --background-color or remove it if the image is too dominant */
+            /* background-color: var(--background-color); removed or commented out if full image desired */
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            /* Added a semi-transparent white background to the container to ensure content readability */
+            background-color: rgba(255, 255, 255, 0.9); /* Adjust transparency as needed (0.9 means 90% opaque) */
+            box-shadow: 0 0 15px rgba(0,0,0,0.1); /* Subtle shadow for definition */
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--primary-color);
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--primary-dark);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-dark);
+        }
+
+        /* Top Announcement Bar */
+        .top-announcement-bar {
+            background-color: var(--announce-bar-bg);
+            color: var(--light-text-color);
+            text-align: center;
+            padding: 8px 0;
+            font-size: 0.9em;
+        }
+
+        /* Header */
+        .main-header {
+            background-color: var(--header-bg);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .header-upper {
+            display: flex;
+            justify-content: flex-end; /* Push contact/social to right */
+            align-items: center;
+            padding: 10px 20px;
+            border-bottom: 1px solid var(--border-color);
+            background-color: var(--top-bar-bg);
+        }
+
+        .header-contact-social {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 0.9em;
+            color: var(--text-color);
+        }
+
+        .header-contact-social a {
+            color: var(--text-color);
+        }
+
+        .header-contact-social a:hover {
+            color: var(--primary-color);
+        }
+
+        .header-main {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo img {
+            height: 60px; /* Adjust logo size */
+            width: auto;
+        }
+
+        .search-bar {
+            display: flex;
+            border: 1px solid var(--primary-color); /* Light blue border */
+            border-radius: 5px; /* Slightly more square than circular */
+            max-width: 700px;
+            margin: 0 20px;
+        }
+
+        .search-bar input {
+            border: none;
+            padding: 10px 15px;
+            outline: none;
+            flex-grow: 1;
+            font-size: 1em;
+            color:#FFD700
+        }
+
+        .search-bar button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+            font-size: 1.1em;
+        }
+
+        .search-bar button:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .header-utility-icons {
+            display: flex;
+            gap: 25px; /* Space out the icons */
+        }
+
+        .header-utility-icons .icon-link {
+            display: flex;
+            align-items: center;
+            color: var(--text-color);
+            font-size: 1.3em;
+        }
+
+        .header-utility-icons .icon-link:hover {
+            color: var(--primary-color);
+        }
+
+
+        /* Primary Navigation */
+        .main-nav-primary {
+            background-color: var(--primary-color);
+            padding: 10px 0;
+            border-bottom: 1px solid var(--primary-dark); /* A subtle divider */
+        }
+
+        .main-nav-primary .container {
+            display: flex;
+            justify-content: center; /* Center the primary nav items */
+            align-items: center;
+        }
+
+        .main-nav-primary ul {
+            display: flex;
+            gap: 30px;
+        }
+
+        .main-nav-primary ul li a {
+            color: var(--light-text-color);
+            font-weight: 600;
+            padding: 5px 0;
+            position: relative;
+            display: block;
+            white-space: nowrap; /* Prevent wrapping */
+        }
+
+        .main-nav-primary ul li a:hover {
+            color:#FFD700;
+        }
+
+        /* Dropdown Menu */
+        .main-nav-primary ul li {
+            position: relative;
+        }
+
+        .main-nav-primary ul .dropdown {
+            display: none;
+            position: absolute;
+            background-color: white;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            min-width: 160px;
+            z-index: 100; /* Ensure it's above other content */
+            top: 100%;
+            left: 0;
+            padding: 10px 0;
+            border-radius: 5px;
+            margin-top: 5px; /* Small gap from parent */
+        }
+
+        .main-nav-primary ul li:hover > .dropdown {
+            display: block;
+        }
+
+        .main-nav-primary ul .dropdown li {
+            padding: 8px 15px;
+            white-space: nowrap;
+        }
+
+        .main-nav-primary ul .dropdown li a {
+            color: var(--text-color);
+            font-weight: 400;
+        }
+
+        .main-nav-primary ul .dropdown li a:hover {
+            color: var(--primary-color);
+            background-color: var(--background-color);
+        }
+
+        .menu-toggle {
+            display: none; /* Hidden by default on desktop */
+            background: none;
+            border: none;
+            font-size: 1.8em; /* Larger toggle icon */
+            color: var(--light-text-color);
+            cursor: pointer;
+        }
+
+        /* Free Shipping Bar */
+        .free-shipping-bar {
+            background-color: var(--free-shipping-bg);
+            color: var(--free-shipping-text);
+            text-align: center;
+            padding: 10px 0;
+            font-size: 1.1em;
+            font-weight: 600;
+            margin-top: 0px; /* Aligns right after the header */
+        }
+
+        /* Hero Section (Drones) */
+        .hero-section {
+            position: relative;
+            background: url('Screenshot (192).jpg') no-repeat center center/cover; /* Use your screenshot */
+            min-height: 450px; /* Adjust height as needed */
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+            color: white; /* Text color for content on the image */
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.7); /* Add text shadow for readability */
+        }
+
+        .hero-content {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start; /* Align content to the left */
+            height: 100%;
+            position: relative;
+            z-index: 2; /* Ensure text is above background overlay */
+        }
+
+        .hero-text {
+            background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent overlay for text readability */
+            padding: 30px;
+            border-radius: 8px;
+            max-width: 400px; /* Control width of text box */
+            margin-left: 20px; /* Push it slightly from the left edge */
+        }
+
+        .hero-text h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+
+        .hero-text ul {
+            list-style: none;
+            margin-bottom: 30px;
+            padding-left: 0;
+        }
+
+        .hero-text ul li {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .hero-text ul li i {
+            color: var(--accent-color); /* Gold checks */
+        }
+
+        .hero-section .btn {
+            font-size: 1.1em;
+            padding: 12px 25px;
+            border-radius: 25px; /* More rounded button */
+        }
+
+        .share-now {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%) rotate(90deg); /* Rotate for vertical text */
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 15px;
+            border-top-left-radius: 8px;
+            border-bottom-left-radius: 8px; /* Corrected to match the side bar effect */
+            z-index: 1;
+        }
+
+        .share-now a {
+            color: white;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transform: rotate(0deg); /* Counter-rotate text if needed, or leave at 0 */
+        }
+        .share-now a i {
+            transform: rotate(-90deg); /* Rotate icon to be upright */
+        }
+        .share-now a:hover {
+            color: var(--accent-color);
+        }
+
+
+        /* Featured Products */
+        .featured-products {
+            margin-bottom: 40px;
+        }
+
+        .featured-products h2 {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            color: var(--primary-dark);
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            justify-content: center;
+        }
+
+        .product-card {
+            background-color: white;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+
+        .product-card h3 {
+            font-size: 1.4em;
+            margin-bottom: 10px;
+            color: var(--text-color);
+        }
+
+        .product-card .price {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 15px;
+        }
+
+        .product-card .add-to-cart-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+
+        .product-card .add-to-cart-btn:hover {
+            background-color: var(--primary-dark);
+        }
+
+        /* Footer */
+        .main-footer {
+            background-color: #333;
+            color: var(--light-text-color);
+            padding: 40px 0 20px;
+            font-size: 0.9em;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .footer-section h3 {
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .footer-section ul {
+            padding: 0;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 8px;
+        }
+
+        .footer-section ul li a {
+            color: var(--light-text-color);
+        }
+
+        .footer-section ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        .footer-section.contact p {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-section.social a {
+            display: inline-block;
+            color: var(--light-text-color);
+            font-size: 1.5em;
+            margin-right: 15px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section.social a:hover {
+            color: var(--primary-color);
+        }
+
+        .footer-bottom {
+            background-color: #222;
+            padding: 15px 0;
+            text-align: center;
+            border-top: 1px solid #444;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .header-upper {
+                justify-content: center;
+            }
+            .header-contact-social {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px 20px;
+            }
+
+            .header-main {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+            .logo {
+                flex-basis: 100%;
+                text-align: center;
+            }
+            .search-bar {
+                margin: 10px 0;
+                max-width: 100%;
+            }
+            .header-utility-icons {
+                flex-basis: 100%;
+                justify-content: center;
+                gap: 40px; /* More space when centered */
+            }
+
+            .main-nav-primary .container,
+            .main-nav-secondary .container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .main-nav-primary ul,
+            .main-nav-secondary ul {
+                flex-direction: column;
+                width: 100%;
+                display: none; /* Hide navigation by default for mobile */
+                margin-top: 15px;
+                background-color: var(--primary-color); /* Ensure nav background */
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            }
+
+            .main-nav-primary ul.active,
+            .main-nav-secondary ul.active {
+                display: flex; /* Show navigation when active */
+            }
+
+            .main-nav-primary ul li,
+            .main-nav-secondary ul li {
+                width: 100%;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            .main-nav-primary ul li:last-child,
+            .main-nav-secondary ul li:last-child {
+                border-bottom: none;
+            }
+
+            .main-nav-primary ul li a,
+            .main-nav-secondary ul li a {
+                padding: 10px 20px;
+                display: block;
+            }
+
+            .main-nav-primary ul .dropdown {
+                position: static; /* Make dropdown static on mobile */
+                width: 100%;
+                box-shadow: none;
+                background-color: rgba(0, 0, 0, 0.1); /* Slightly darker for nested nav */
+                padding: 0;
+                margin-top: 5px;
+                border-radius: 0;
+            }
+            .main-nav-primary ul .dropdown li {
+                padding-left: 30px; /* Indent dropdown items */
+            }
+
+            .menu-toggle {
+                display: block; /* Show menu toggle on mobile */
+                align-self: flex-end;
+                position: absolute; /* Position it relative to the container */
+                right: 20px;
+                top: 10px;
+                color: var(--text-color); /* Change color for visibility */
+            }
+            .main-nav-primary .container {
+                position: relative; /* For menu toggle absolute positioning */
+            }
+
+
+            .hero-section {
+                min-height: 350px;
+                background-position: 70% center; /* Adjust background position */
+            }
+            .hero-text {
+                max-width: 90%;
+                margin: 0 auto;
+                text-align: center;
+                padding: 20px;
+            }
+            .hero-text h1 {
+                font-size: 2.5em;
+            }
+            .hero-text ul {
+                display: inline-block; /* Center list items if fewer */
+                text-align: left; /* Keep text aligned left within its block */
+            }
+
+            .product-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            .footer-section {
+                min-width: unset;
+                width: 100%;
+            }
+            .footer-section.social {
+                margin-top: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-contact-social span {
+                display: none; /* Hide phone number on smaller screens if space is tight */
+            }
+
+            .hero-section {
+                min-height: 300px;
+                background-position: 60% center;
+            }
+            .hero-text h1 {
+                font-size: 2em;
+            }
+            .hero-text ul li {
+                font-size: 1em;
+            }
+
+            .featured-products h2 {
+                font-size: 2em;
+            }
+            .share-now {
+                top: unset;
+                bottom: 20px;
+                right: -20px; /* Hide part of it or adjust */
+                transform: rotate(0deg); /* Revert rotation for smaller screens */
+                padding: 8px 12px;
+                border-radius: 5px;
+                z-index: 5;
+            }
+            .share-now a i {
+                transform: rotate(0deg); /* Revert icon rotation */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo img {
+                height: 45px;
+            }
+            .header-utility-icons {
+                gap: 20px;
+            }
+            .search-bar input, .search-bar button {
+                padding: 8px 10px;
+            }
+
+            .main-nav-primary ul li a,
+            .main-nav-secondary ul li a {
+                font-size: 0.95em;
+            }
+
+            .hero-section {
+                min-height: 250px;
+                background-position: 50% center;
+            }
+            .hero-text {
+                padding: 15px;
+            }
+            .hero-text h1 {
+                font-size: 1.8em;
+                margin-bottom: 10px;
+            }
+            .hero-text ul li {
+                font-size: 0.9em;
+                margin-bottom: 5px;
+            }
+            .hero-section .btn {
+                padding: 8px 15px;
+                font-size: 1em;
+            }
+
+            .product-grid {
+                grid-template-columns: 1fr; /* Single column on very small screens */
+            }
+
+            .share-now {
+                display: none; /* Hide on very small screens if it takes up too much space */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-announcement-bar">
+        Delivery will resume after Eid
+    </div>
+
+    <header class="main-header">
+        <div class="container header-upper">
+            <div class="header-contact-social">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-tiktok"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <span>0304-111-6689</span>
+            </div>
+        </div>
+        
+        <div class="container header-main">
+            <div class="logo">
+                <a href="#">
+                    <img src="https://th.bing.com/th/id/OIP.6vppQ5NYLH7E0pzNbdFcPgHaFn?r=0&rs=1&pid=ImgDetMain" alt="MyToyZone Logo">
+                </a>
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Search for products...">
+                <button type="submit"><i class="fas fa-search"></i></button>
+            </div>
+            <div class="header-utility-icons">
+                <a href="#" class="icon-link"><i class="fas fa-search"></i></a>
+                <a href="#" class="icon-link"><i class="fas fa-user"></i></a>
+                <a href="#" class="icon-link"><i class="fas fa-shopping-cart"></i></a>
+            </div>
+        </div>
+
+        <nav class="main-nav-primary">
+            <div class="container">
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#" id="newArrivalToggle">New Arrival <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown">
+                            <li><a href="teddy-collection.html">Teddy Collection</a></li>
+                            <li><a href="duck-collection.html">Duck Collection</a></li>
+                            <li><a href="penguin-collection.html">Penguin Collection</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Boy</a></li>
+                    <li><a href="#">Girl</a></li>
+                    <li><a href="#">Baby</a></li>
+                    <li><a href="#">Type Of Toy <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown">
+                            <li><a href="#">Action Figures</a></li>
+                            <li><a href="#">Board Games</a></li>
+                            <li><a href="#">Puzzles</a></li>
+                            <li><a href="#">Outdoor Toys</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <button class="menu-toggle" aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <section class="hero-section hero-drones">
+            <div class="hero-content container">
+                <div class="hero-text">
+                    <h1>Discover the Joy of Play</h1>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> Wide Range of Toys</li>
+                        <li><i class="fas fa-check-circle"></i> High Quality & Safe Products</li>
+                        <li><i class="fas fa-check-circle"></i> Fast & Reliable Shipping</li>
+                        <li><i class="fas fa-check-circle"></i> Excellent Customer Service</li>
+                    </ul>
+                    <a href="#" class="btn">Shop Now</a>
+                </div>
+            </div>
+            <div class="share-now">
+                <a href="#"><i class="fas fa-share-alt"></i> Share Now</a>
+            </div>
+        </section>
+
+        <section class="featured-products container">
+            <h2>Featured Products</h2>
+            <div class="product-grid">
+                <div class="product-card">
+                    <img src="https://th.bing.com/th/id/OIP.54JKqaJxNfH3JhMP6cz4uAHaHS?r=0&w=640&h=630&rs=1&pid=ImgDetMain" alt="Teddy Bear">
+                    <h3>Classic Teddy Bear</h3>
+                    <p class="price">$29.99</p>
+                    <button class="add-to-cart-btn">Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <img src="https://th.bing.com/th/id/OIP._BwMseXWffJeNU9n5jMFaQHaHa?r=0&w=800&h=800&rs=1&pid=ImgDetMain" alt="Duck Toy">
+                    <h3>Rubber Duckie Set</h3>
+                    <p class="price">$12.50</p>
+                    <button class="add-to-cart-btn">Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <img src="https://th.bing.com/th/id/OIP.91afk9qAdUnUNIAPJprxVQHaHa?r=0&w=800&h=800&rs=1&pid=ImgDetMain" alt="Penguin Plush">
+                    <h3>Cute Penguin Plush</h3>
+                    <p class="price">$24.00</p>
+                    <button class="add-to-cart-btn">Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <img src="https://th.bing.com/th/id/R.f8d7324fcd28a5e43f5adcf46d48c88a?rik=M3B9NCLXacbQUA&pid=ImgRaw&r=0" alt="Race Car">
+                    <h3>Remote Control Car</h3>
+                    <p class="price">$45.99</p>
+                    <button class="add-to-cart-btn">Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <img src="https://img.lakeshorelearning.com/is/image/OCProduction/zz174?id=i0urK3&fmt=jpg&dpr=off&fit=constrain,1&wid=500&hei=375&wid=500&hei=375&fmt=pjpeg&pscan=auto&qlt=90,1&op_sharpen=0&resMode=bilin&op_usm=2,0.25,7,0" alt="Building Blocks">
+                    <h3>Educational Building Blocks</h3>
+                    <p class="price">$35.00</p>
+                    <button class="add-to-cart-btn">Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <img src="https://th.bing.com/th/id/OIP.DbRwwFzULhssaSMTM15fbgHaHa?r=0&rs=1&pid=ImgDetMain" alt="Doll House">
+                    <h3>Deluxe Doll House</h3>
+                    <p class="price">$89.99</p>
+                    <button class="add-to-cart-btn">Add to Cart</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container footer-content">
+            <div class="footer-section about">
+                <h3>About MyToyZone</h3>
+                <p>Your one-stop shop for high-quality toys and games that bring joy to children of all ages.</p>
+            </div>
+            <div class="footer-section links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Shipping Info</a></li>
+                </ul>
+            </div>
+            <div class="footer-section contact">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Toy Street, Playville</p>
+                <p><i class="fas fa-phone"></i> +123 456 7890</p>
+                <p><i class="fas fa-envelope"></i> info@mytoyzone.com</p>
+            </div>
+            <div class="footer-section social">
+                <h3>Follow Us</h3>
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                &copy; 2025 MyToyZone. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const mainNavPrimaryUl = document.querySelector('.main-nav-primary ul');
+            const newArrivalToggle = document.getElementById('newArrivalToggle'); // Get the New Arrival link
+
+            if (menuToggle && mainNavPrimaryUl) {
+                menuToggle.addEventListener('click', () => {
+                    mainNavPrimaryUl.classList.toggle('active');
+                });
+
+                // Close nav when a regular link is clicked (not a dropdown toggle)
+                mainNavPrimaryUl.querySelectorAll('li > a:not(#newArrivalToggle)').forEach(link => {
+                    link.addEventListener('click', () => {
+                        if (mainNavPrimaryUl.classList.contains('active')) {
+                            mainNavPrimaryUl.classList.remove('active');
+                        }
+                    });
+                });
+            }
+
+            // Handle dropdown visibility for "New Arrival" on hover (desktop) and click (mobile)
+            if (newArrivalToggle) {
+                const dropdown = newArrivalToggle.nextElementSibling; // Get the dropdown UL
+
+                // For desktop hover (already handled by CSS, but good to note)
+                // For mobile click:
+                newArrivalToggle.addEventListener('click', (event) => {
+                    // Prevent default link behavior if on mobile and dropdown is toggled
+                    if (window.innerWidth <= 992) { // Based on your media query breakpoint
+                        event.preventDefault();
+                        dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+                    }
+                });
+
+                // Close dropdown if clicked outside on mobile
+                document.addEventListener('click', (event) => {
+                    if (window.innerWidth <= 992 && !newArrivalToggle.contains(event.target) && !dropdown.contains(event.target)) {
+                        dropdown.style.display = 'none';
+                    }
+                });
+            }
+
+            // Basic "Add to Cart" button feedback (optional)
+            const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    alert('Product added to cart!'); // Replace with actual cart logic
+                    // In a real application, you'd send data to a backend, update a cart icon, etc.
+                });
+            });
+        });
+    </script>
+</body>
+</html>
