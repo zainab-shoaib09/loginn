@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cotton Candy - Sweet Delights</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Quicksand:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css"> <!-- Link to your main CSS file -->
+</head>
+<body>
+
+    <!-- Header Section - Replicated for consistency across pages -->
+    <header class="main-header">
+        <div class="container header-upper">
+            <div class="header-contact-social">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                <span>Call Us: 1-800-CANDY-CO</span>
+            </div>
+        </div>
+        
+        <div class="container header-main">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="https://th.bing.com/th/id/OIP.ZmH4jT9zk1uoZbthzCd7mgHaJv?r=0&o=7&rm=3&rs=1&pid=ImgDetMain" alt="Candy House Logo">
+                </a>
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Search for your favorite candy...">
+                <button type="submit"><i class="fas fa-search"></i></button>
+            </div>
+            <div class="header-utility-icons">
+                <a href="#" class="icon-link" aria-label="Search"><i class="fas fa-search"></i></a>
+                <a href="#" class="icon-link" aria-label="Account"><i class="fas fa-user"></i></a>
+                <a href="#" class="icon-link" aria-label="Shopping Cart"><i class="fas fa-shopping-cart"></i></a>
+            </div>
+        </div>
+
+        <nav class="main-nav-primary">
+            <div class="container">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li class="has-dropdown">
+                        <a href="#">Candys <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown">
+                            <li><a href="hard-candies.html">Hard Candies</a></li>
+                            <li><a href="chocolates.html">Chocolates</a></li>
+                            <li><a href="gummies.html">Gummies & Chews</a></li>
+                            <li><a href="all-candies.html">All Candies</a></li>
+                        </ul>
+                    </li>
+                    <li class="active-page"><a href="cotton-candy.html">Cotton Candy</a></li> <!-- Added active-page class -->
+                    <li><a href="novelty-treats.html">Novelty Treats</a></li>
+                    <li><a href="new-arrivals.html">New Arrivals</a></li>
+                    <li><a href="about-us.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                <button class="menu-toggle" aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content Area for Cotton Candy Page -->
+    <main class="main-content">
+        <section class="cotton-candy-hero container">
+            <div class="hero-text-content">
+                <h1 class="page-main-title">Cotton Candy Fantasies</h1>
+                <p class="page-subtitle">Dive into a world of fluffy, melt-in-your-mouth delight.</p>
+            </div>
+            <div class="filter-categories-bar">
+                <ul class="filter-buttons">
+                    <li><button class="filter-btn active">All</button></li>
+                    <li><button class="filter-btn">Fruity Swirls</button></li>
+                    <li><button class="filter-btn">Classic Pinks</button></li>
+                    <li><button class="filter-btn">Sour & Zingy</button></li>
+                    <li><button class="filter-btn">Sparkle Blends</button></li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="product-listing container">
+            <div class="product-grid">
+                <!-- Cotton Candy Product Card 1 -->
+                <div class="product-card">
+                    <img src="https://i.pinimg.com/originals/c9/33/27/c933278f860e55a06c6c4df760c5076c.jpg" alt="Blue Raspberry Cotton Candy">
+                    <h3>Blue Raspberry Cloud</h3>
+                    <p class="product-description">Sweet and tangy blue raspberry, a classic favorite.</p>
+                    <p class="price">$4.50</p>
+                    <button class="add-to-cart-btn">Add to Cart</button>
+                </div>
+                <!-- Cotton Candy Product Card 2 -->
+                <div class="product-card">
+                    <img src="https://th.bing.com/th/id/OIP.w0p-j3K-MvH94wY3d1t10AHaE8?rs=1&pid=ImgDetMain" alt="Pink Vanilla Cotton Candy">
+                    <h3>Classic Pink Vanilla</h3>
+                    <p class="product-description">The timeless, sugary taste of traditional vanilla cotton candy.</p>
+                    <p class="price">$4.50</p>
+                    <button class="add-to-cart-btn">Add to Cart</button>
+                </div>
+                <!-- Cotton Candy Product Card 3 -->
+                <div class="product-card">
+                    <img src="https://www.wilton.com/dw/image/v2/AAWA_PRD/on/demandware.static/-/Sites-wilton-product-master/default/dw106d3330/images/product/2007-0-0016/2007-0-0016_4.jpg?sw=800&sh=800" alt="Grape Cotton Candy">
+                    <h3>Grape Galaxy Fluff</h3>
+                    <p class="product-description">A burst of juicy grape flavor, light and airy.</p>
+                    <p class="price">$4.75</p>
+                    <button class="add-to-cart-btn">Add to Cart</button>
+                </div>
+                <!-- Cotton Candy Product Card 4 -->
+                <div class="product-card">
+                    <img src="https://s3.amazonaws.com/images.ecwid.com/images/15474921/1070747209.jpg" alt="Green Apple Cotton Candy">
+                    <h3>Sour Green Apple Whirl</h3>
+                    <p class="product-description">A tangy twist with refreshing green apple notes.</p>
+                    <p class="price">$4.75</p>
+                    <button class="add-to-cart-btn">Add to Cart</button>
+                </div>
+                <!-- Cotton Candy Product Card 5 (Example New) -->
+                <div class="product-card">
+                    <img src="https://th.bing.com/th/id/OIP.Ie81Ld-B6cWbN3f6Y2mH4wHaE8?rs=1&pid=ImgDetMain" alt="Cherry Cotton Candy">
+                    <h3>Cherry Blossom Cloud</h3>
+                    <p class="product-description">Delicate cherry flavor, a blooming sensation.</p>
+                    <p class="price">$4.50</p>
+                    <button class="add-to-cart-btn">Add to Cart</button>
+                </div>
+                <!-- Cotton Candy Product Card 6 (Example New) -->
+                <div class="product-card">
+                    <img src="https://d2d8wwwkmhncic.cloudfront.net/300x/filters:fill(white,true):format(jpeg)/d2lnr5mha7bywj.cloudfront.net/product-image/original/83d21c37-4d92-4f32-bbd9-952a23e5971a.jpg" alt="Mystery Cotton Candy">
+                    <h3>Unicorn Swirl Surprise</h3>
+                    <p class="product-description">Mysterious fruity blend with sparkling edible glitter.</p>
+                    <p class="price">$5.25</p>
+                    <button class="add-to-cart-btn">Add to Cart</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Section - Replicated for consistency across pages -->
+    <footer class="main-footer">
+        <div class="container footer-content">
+            <div class="footer-section about">
+                <h3>About Sweet Delights</h3>
+                <p>Bringing you the finest and freshest candies for every celebration and craving. Pure joy in every bite!</p>
+            </div>
+            <div class="footer-section links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Shipping Info</a></li>
+                </ul>
+            </div>
+            <div class="footer-section contact">
+                <h3>Get In Touch</h3>
+                <p><i class="fas fa-map-marker-alt"></i> Candy Land, Sweet Street 456</p>
+                <p><i class="fas fa-phone"></i> +1 (555) 123-SWEET</p>
+                <p><i class="fas fa-envelope"></i> info@sweetdelights.com</p>
+            </div>
+            <div class="footer-section social">
+                <h3>Follow Our Sweetness</h3>
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                &copy; 2025 Sweet Delights. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const mainNavPrimaryUl = document.querySelector('.main-nav-primary ul');
+            const hasDropdownLinks = document.querySelectorAll('.has-dropdown > a');
+
+            // Toggle mobile menu
+            if (menuToggle && mainNavPrimaryUl) {
+                menuToggle.addEventListener('click', () => {
+                    mainNavPrimaryUl.classList.toggle('active');
+                });
+            }
+
+            // Handle dropdown toggling for mobile
+            hasDropdownLinks.forEach(link => {
+                link.addEventListener('click', (event) => {
+                    if (window.innerWidth <= 992) { // Apply only on mobile/tablet screens
+                        event.preventDefault(); // Prevent navigating to '#'
+                        const dropdown = link.nextElementSibling;
+                        if (dropdown) {
+                            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+                            link.querySelector('.fa-chevron-down').classList.toggle('fa-rotate-180'); // Rotate arrow
+                        }
+                    }
+                });
+            });
+
+            // Close mobile menu or dropdowns when a non-dropdown link is clicked
+            mainNavPrimaryUl.querySelectorAll('a:not(.has-dropdown > a)').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth <= 992 && mainNavPrimaryUl.classList.contains('active')) {
+                        mainNavPrimaryUl.classList.remove('active');
+                        // Also close any open dropdowns
+                        document.querySelectorAll('.dropdown').forEach(dropdown => {
+                            dropdown.style.display = 'none';
+                            dropdown.previousElementSibling.querySelector('.fa-chevron-down').classList.remove('fa-rotate-180');
+                        });
+                    }
+                });
+            });
+
+            // Filter button active state
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    // In a real application, you would add logic here to filter products
+                    alert('Filter: ' + button.textContent + ' (Filtering logic not implemented)');
+                });
+            });
+
+            // Basic "Add to Cart" button feedback (optional)
+            const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    alert('Yummy! Added to cart!'); // Replace with actual cart logic
+                });
+            });
+        });
+    </script>
+</body>
+</html>
