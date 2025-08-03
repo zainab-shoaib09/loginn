@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PowerCity Electronics</title>
+    <!-- Load Tailwind CSS for utility classes -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Link for Inter font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom CSS styles */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6; /* Light gray background */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Dropdown specific styles */
+        .dropdown:hover .dropdown-menu {
+            display: block;
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-menu {
+            display: none;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out, transform 0.2s ease-in-out;
+        }
+
+        /* Responsive adjustments for header/nav on small screens */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            .nav-menu {
+                flex-direction: column;
+                margin-top: 1rem;
+            }
+            .nav-item {
+                margin-bottom: 0.5rem;
+            }
+            .dropdown {
+                width: 100%; /* Make dropdown full width on small screens */
+            }
+            .dropdown-menu {
+                position: static; /* Adjust position for small screens */
+                width: 100%;
+                background-color: #4a5568; /* Darker background for nested menu */
+            }
+            .dropdown-menu li {
+                padding: 0.5rem 0;
+            }
+        }
+
+        /* Modal specific styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0s, opacity 0.3s ease-in-out;
+        }
+
+        .modal-overlay.active {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background-color: #ffffff;
+            padding: 1.5rem;
+            border-radius: 0.75rem; /* rounded-xl */
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1); /* shadow-lg */
+            max-width: 90%;
+            width: 400px; /* Fixed width for the modal */
+            text-align: center;
+            position: relative;
+        }
+
+        .modal-close-button {
+            position: absolute;
+            top: 0.75rem;
+            right: 0.75rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #4a5568; /* gray-700 */
+        }
+
+        /* New background image styling for the product grid */
+        .product-grid-wrapper {
+            position: relative; /* To contain the absolute positioned background */
+            /* Increased padding to create more space around the grid and reveal background */
+            padding: 4rem; /* Increased from 1.5rem */
+            border-radius: 0.75rem; /* Matches rounded-xl */
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1); /* Matches shadow-lg */
+            background-color: transparent; /* Make the wrapper transparent so background shows */
+            overflow: hidden; /* To contain the background image within the border-radius */
+        }
+
+        .product-grid-background {
+            background-image: url('https://lens.usercontent.google.com/image?vsrid=CMmc_bOmktG6BRACGAEiJGRkMGFmNWYyLWFiZTAtNGZiZi04ZjRhLTQwM2VkZmI0NzEzZjIGIgJlbigROLaCjf2GlI4D&gsessionid=UMWfOnB52WGIkdeYiSgqci3XwuXGS9BPh_REKjI1oNFIoazagMpnIQ'); /* Placeholder product background image */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+           
+        }
+
+        /* Adjust product card background to be opaque */
+        .product-card {
+            background-color: #ffffff; /* Opaque white background for cards */
+        }
+
+        /* Adjust top margin for the main content to create space below the header */
+        .main-content-section {
+            margin-top: 4rem; /* Increased margin-top to push content down from header */
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+    <!-- Header Section -->
+    <header class="bg-gray-800 text-white p-4 shadow-lg rounded-b-lg mb-8">
+        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center header-content">
+            <h1 class="text-4xl font-bold tracking-wide mb-4 md:mb-0">PowerCity Electronics</h1>
+
+            <!-- Navigation Bar -->
+            <nav class="nav-menu flex flex-wrap justify-center md:justify-end gap-x-6">
+                <div class="relative dropdown nav-item">
+                    <button class="text-lg font-medium hover:text-gray-300 focus:outline-none py-2 px-3 rounded-md">
+                        Brands <span class="ml-1">&#9660;</span> <!-- Down arrow -->
+                    </button>
+                    <ul class="dropdown-menu absolute bg-gray-700 text-white rounded-md shadow-lg z-20 mt-2 py-2 w-48 text-left">
+                        <li><a href="#" class="block px-4 py-2 hover:bg-gray-600 rounded-md">Dawlance</a></li>
+                        <li><a href="#" class="block px-4 py-2 hover:bg-gray-600 rounded-md">LG</a></li>
+                        <li><a href="#" class="block px-4 py-2 hover:bg-gray-600 rounded-md">Samsung</a></li>
+                        <li><a href="#" class="block px-4 py-2 hover:bg-gray-600 rounded-md">Gree</a></li>
+                        <li><a href="#" class="block px-4 py-2 hover:bg-gray-600 rounded-md">Boss</a></li>
+                        <li><a href="#" class="block px-4 py-2 hover:bg-gray-600 rounded-md">Ecostar</a></li>
+                        <li><a href="#" class="block px-4 py-2 hover:bg-gray-600 rounded-md">General Tec</a></li>
+                        <li><a href="#" class="block px-4 py-2 hover:bg-gray-600 rounded-md">Canon</a></li>
+                        <li><a href="#" class="block px-4 py-2 hover:bg-gray-600 rounded-md">Hisense</a></li>
+                        <li><a href="#" class="block px-4 py-2 hover:bg-gray-600 rounded-md">Homage</a></li>
+                        <li><a href="#" class="block px-4 py-2 hover:bg-gray-600 rounded-md">Siemens</a></li>
+                        <li><a href="#" class="block px-4 py-2 hover:bg-gray-600 rounded-md">Bosch</a></li>
+                        <li><a href="#" class="block px-4 py-2 hover:bg-gray-600 rounded-md">Multynet</a></li>
+                        <li><a href="#" class="block px-4 py-2 hover:bg-gray-600 rounded-md">Audionic</a></li>
+                        <li><a href="#" class="block px-4 py-2 hover:bg-gray-600 rounded-md">Orient</a></li>
+                        <li><a href="#" class="block px-4 py-2 hover:bg-gray-600 rounded-md">Pel</a></li>
+                    </ul>
+                </div>
+                <!-- Changed href to trigger JavaScript function -->
+                <a href="javascript:void(0)" onclick="openModal('supportModal')" class="text-lg font-medium hover:text-gray-300 py-2 px-3 rounded-md nav-item">Support/Help Center</a>
+                <a href="javascript:void(0)" onclick="openModal('addressModal')" class="text-lg font-medium hover:text-gray-300 py-2 px-3 rounded-md nav-item">Address</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Section -->
+    <main class="container mx-auto p-4 flex-grow relative main-content-section">
+        <h2 class="text-3xl font-semibold text-gray-800 mb-6 text-center">Our Products</h2>
+
+        <!-- Product Grid Container with Background Image -->
+        <div class="product-grid-wrapper">
+            <div class="product-grid-background"></div> <!-- This will hold the background image -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 relative z-10">
+                <!-- Product Card 1: Air Fryer X100 -->
+                <div class="product-card rounded-xl shadow-md overflow-hidden transform transition-transform duration-300 hover:scale-105 hover:shadow-xl">
+                    <a href="product-airfryer-x100.html" class="block">
+                        <img src="https://tse2.mm.bing.net/th/id/OIP.0MBMM023Fv8Ie8xNgju02QHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Air Fryer X100" class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <h3 class="font-bold text-xl mb-2 text-gray-900">Air Fryer X100</h3>
+                            <p class="text-gray-700 text-lg mb-4">PKR 15,999</p>
+                            <button class="w-full bg-gray-700 text-white py-2 px-4 rounded-lg font-semibold hover:bg-gray-900 transition duration-200">
+                                View Details
+                            </button>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Product Card 2: Smart Toaster Pro -->
+                <div class="product-card rounded-xl shadow-md overflow-hidden transform transition-transform duration-300 hover:scale-105 hover:shadow-xl">
+                    <a href="product-toaster-pro.html" class="block">
+                        <img src="https://i5.walmartimages.com/seo/Cusimax-Brushed-Stainless-Steel-2-Slice-Toaster_4e19d182-9e6f-4f19-a4a4-3ba37ac1cb34.7693f08135afdd413098cda2f8032a22.jpeg" alt="Smart Toaster Pro" class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <h3 class="font-bold text-xl mb-2 text-gray-900">Smart Toaster Pro</h3>
+                            <p class="text-gray-700 text-lg mb-4">PKR 8,499</p>
+                            <button class="w-full bg-gray-700 text-white py-2 px-4 rounded-lg font-semibold hover:bg-gray-900 transition duration-200">
+                                View Details
+                            </button>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Product Card 3: Electric Kettle Ultra -->
+                <div class="product-card rounded-xl shadow-md overflow-hidden transform transition-transform duration-300 hover:scale-105 hover:shadow-xl">
+                    <a href="product-kettle-ultra.html" class="block">
+                        <img src="https://tse4.mm.bing.net/th/id/OIP.2QCk7ioeMuo1Qm030L1pVgHaEO?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Electric Kettle Ultra" class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <h3 class="font-bold text-xl mb-2 text-gray-900">Electric Kettle Ultra</h3>
+                            <p class="text-gray-700 text-lg mb-4">PKR 4,999</p>
+                            <button class="w-full bg-gray-700 text-white py-2 px-4 rounded-lg font-semibold hover:bg-gray-900 transition duration-200">
+                                View Details
+                            </button>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Product Card 4: Coffee Maker Deluxe -->
+                <div class="product-card rounded-xl shadow-md overflow-hidden transform transition-transform duration-300 hover:scale-105 hover:shadow-xl">
+                    <a href="product-coffeemaker-deluxe.html" class="block">
+                        <img src="https://th.bing.com/th/id/R.79550b1722fde228ef126fb47a72acaa?rik=Rau9AsZJ54cQOw&pid=ImgRaw&r=0" alt="Coffee Maker Deluxe" class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <h3 class="font-bold text-xl mb-2 text-gray-900">Coffee Maker Deluxe</h3>
+                            <p class="text-gray-700 text-lg mb-4">PKR 12,500</p>
+                            <button class="w-full bg-gray-700 text-white py-2 px-4 rounded-lg font-semibold hover:bg-gray-900 transition duration-200">
+                                View Details
+                            </button>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Product Card 5: Hand Blender PowerMax -->
+                <div class="product-card rounded-xl shadow-md overflow-hidden transform transition-transform duration-300 hover:scale-105 hover:shadow-xl">
+                    <a href="product-handblender-pm.html" class="block">
+                        <img src="https://www.thespruce.com/thmb/EMVsLEwPd2-LSYmC8EXbZF5rhvY=/1999x1500/filters:fill(auto,1)/Washingmachinelaundryroom-GettyImages-171578869-734c3cd392f04f24aca8768fa45d61a7.jpg" alt="Washing Machine" class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <h3 class="font-bold text-xl mb-2 text-gray-900">Wahing Machine</h3>
+                            <p class="text-gray-700 text-lg mb-4">PKR 7,200</p>
+                            <button class="w-full bg-gray-700 text-white py-2 px-4 rounded-lg font-semibold hover:bg-gray-900 transition duration-200">
+                                View Details
+                            </button>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Product Card 6: Stand Mixer ChefPro -->
+                <div class="product-card rounded-xl shadow-md overflow-hidden transform transition-transform duration-300 hover:scale-105 hover:shadow-xl">
+                    <a href="product-mixer-chefpro.html" class="block">
+                        <img src="https://img.freepik.com/premium-photo/38inch-smart-tv-led-led-screen_1017677-13198.jpg?w=2000" alt="LED TVs" class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <h3 class="font-bold text-xl mb-2 text-gray-900">LED TVs</h3>
+                            <p class="text-gray-700 text-lg mb-4">PKR 25,000</p>
+                            <button class="w-full bg-gray-700 text-white py-2 px-4 rounded-lg font-semibold hover:bg-gray-900 transition duration-200">
+                                View Details
+                            </button>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- New Product Card 7: Juicer ProBlend -->
+                <div class="product-card rounded-xl shadow-md overflow-hidden transform transition-transform duration-300 hover:scale-105 hover:shadow-xl">
+                    <a href="product-juicer-problend.html" class="block">
+                        <img src="https://www.alfatah.com.pk/wp-content/uploads/2025/02/Top-Categories-05.png" alt="Juicer ProBlend" class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <h3 class="font-bold text-xl mb-2 text-gray-900">Air Condiitioners</h3>
+                            <p class="text-gray-700 text-lg mb-4">PKR 11,500</p>
+                            <button class="w-full bg-gray-700 text-white py-2 px-4 rounded-lg font-semibold hover:bg-gray-900 transition duration-200">
+                                View Details
+                            </button>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- New Product Card 8: Induction Cooker Smart -->
+                <div class="product-card rounded-xl shadow-md overflow-hidden transform transition-transform duration-300 hover:scale-105 hover:shadow-xl">
+                    <a href="product-induction-cooker-smart.html" class="block">
+                        <img src="https://tse3.mm.bing.net/th/id/OIP.crFaZkgRPis8jYcq2wLRggHaFY?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Induction Cooker Smart" class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <h3 class="font-bold text-xl mb-2 text-gray-900">Kitchen Appliances</h3>
+                            <p class="text-gray-700 text-lg mb-4">PKR 9,800</p>
+                            <button class="w-full bg-gray-700 text-white py-2 px-4 rounded-lg font-semibold hover:bg-gray-900 transition duration-200">
+                                View Details
+                            </button>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="bg-gray-800 text-white p-4 mt-8 rounded-t-lg">
+        <div class="container mx-auto text-center text-sm">
+            <p>&copy; 2025 PowerCity Electronics. All rights reserved.</p>
+            <p>Designed with <span class="text-red-500">&hearts;</span> by Your Name/Company</p>
+        </div>
+    </footer>
+
+    <!-- Support Help Center Modal -->
+    <div id="supportModal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close-button" onclick="closeModal('supportModal')">&times;</button>
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">Support & Help Center</h3>
+            <p class="text-gray-700 text-lg mb-2">For immediate assistance, please call:</p>
+            <p class="text-gray-900 text-xl font-semibold">03175411786</p>
+            <p class="text-gray-700 text-base mt-4">Our team is available to assist you with any queries or issues.</p>
+        </div>
+    </div>
+
+    <!-- Address Modal -->
+    <div id="addressModal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close-button" onclick="closeModal('addressModal')">&times;</button>
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">Our Address</h3>
+            <p class="text-gray-700 text-lg">PowerCity Electronics</p>
+            <p class="text-gray-700 text-lg">Aysria Road, Jhelum</p>
+            <p class="text-gray-700 text-base mt-4">We look forward to welcoming you!</p>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript for modal functionality
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.add('active');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        // Close modal when clicking outside of it
+        document.addEventListener('click', function(event) {
+            const supportModal = document.getElementById('supportModal');
+            const addressModal = document.getElementById('addressModal');
+
+            if (event.target === supportModal) {
+                closeModal('supportModal');
+            }
+            if (event.target === addressModal) {
+                closeModal('addressModal');
+            }
+        });
+    </script>
+</body>
+</html>
