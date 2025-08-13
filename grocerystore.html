@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grocery App</title>
+    
+    <!-- Using Font Awesome for icons from a CDN -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    
+    <!-- All CSS is now included directly in the HTML file for a self-contained document -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f1f5f9;
+        }
+
+        .header {
+            background-color: #fff;
+            padding: 10px 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-main {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo img {
+            height: 40px;
+        }
+
+        .home-link {
+            text-decoration: none;
+            color: #10b981;
+            font-weight: bold;
+        }
+
+        .delivery-info {
+            text-align: center;
+            margin: 0 20px;
+        }
+
+        .delivery-info span {
+            color: #64748b;
+            font-size: 12px;
+        }
+
+        .delivery-info p {
+            margin: 0;
+            font-weight: bold;
+        }
+
+        .search-bar {
+            display: flex;
+            flex-grow: 1;
+            margin: 0 20px;
+        }
+
+        .search-bar input {
+            border: 1px solid #e2e8f0;
+            padding: 8px 12px;
+            border-radius: 4px;
+            flex-grow: 1;
+            margin-right: 5px;
+        }
+
+        .search-bar button {
+            background-color: #10b981;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .cart {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .cart a {
+            font-size: 24px;
+            text-decoration: none;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -10px;
+            background-color: #f03e3e;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 12px;
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        .categories {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .categories h2, .top-sellers h2 {
+            margin-top: 0;
+            margin-bottom: 20px;
+            color: #333;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+            text-align: center;
+        }
+
+        .category-item {
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 8px;
+            transition: transform 0.2s;
+        }
+
+        .category-item:hover {
+            transform: scale(1.05);
+        }
+
+        .category-item img {
+            width: 100%;
+            max-width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .category-item p {
+            margin-top: 10px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .top-sellers {
+            margin-top: 20px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 20px;
+        }
+
+        .product-card {
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .product-card img {
+            width: 100%;
+            max-height: 150px;
+            object-fit: contain;
+            border-radius: 4px;
+        }
+
+        .product-title {
+            font-weight: bold;
+            margin: 10px 0 5px 0;
+            height: 40px; /* fixed height for consistent card size */
+        }
+        
+        .product-unit {
+            color: #64748b;
+            font-size: 14px;
+            margin: 0 0 10px 0;
+        }
+
+        .product-price {
+            font-size: 18px;
+            font-weight: bold;
+            color: #10b981;
+            margin: 0;
+        }
+
+        .old-price {
+            font-size: 14px;
+            color: #94a3b8;
+            text-decoration: line-through;
+            margin-left: 5px;
+        }
+
+        .discount {
+            font-size: 12px;
+            color: #ef4444;
+            background-color: #fecaca;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+            margin-left: 5px;
+        }
+
+        .add-to-cart-btn {
+            background-color: #10b981;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.2s;
+        }
+
+        .add-to-cart-btn:hover {
+            background-color: #059669;
+        }
+        
+        /* Category Page and Sub-Category styles */
+        .category-page {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .sub-categories {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .sub-category-btn {
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 10px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .sub-category-btn:hover, .sub-category-btn.active {
+            background-color: #10b981;
+            color: white;
+        }
+        
+        .breadcrumb {
+            color: #64748b;
+            font-size: 14px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .breadcrumb a {
+            color: #10b981;
+            text-decoration: none;
+            margin: 0 5px;
+        }
+        
+        .back-arrow {
+            margin-right: 10px;
+            color: #333;
+        }
+        
+        /* Cart Page Styles */
+        .cart-page {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            display: none; /* Initially hidden */
+        }
+        
+        .cart-header {
+            display: flex;
+            align-items: center;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .cart-header h2 {
+            margin: 0 0 0 10px;
+            flex-grow: 1;
+        }
+        
+        .cart-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 15px 0;
+        }
+
+        .item-details {
+            display: flex;
+            align-items: center;
+        }
+        
+        .item-details img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-right: 15px;
+        }
+
+        .item-info p {
+            margin: 0;
+            font-weight: bold;
+        }
+
+        .item-info span {
+            font-size: 14px;
+            color: #64748b;
+        }
+
+        .item-controls {
+            display: flex;
+            align-items: center;
+        }
+        
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+
+        .quantity-controls button {
+            background-color: #f8fafc;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        .quantity-controls span {
+            padding: 0 10px;
+        }
+
+        .delete-btn {
+            background-color: transparent;
+            border: none;
+            color: #ef4444;
+            cursor: pointer;
+            font-size: 18px;
+        }
+        
+        .cart-footer {
+            margin-top: 20px;
+            border-top: 2px solid #e2e8f0;
+            padding-top: 20px;
+            text-align: right;
+        }
+
+        .cart-total {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .checkout-btn {
+            background-color: #10b981;
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .header-main {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .search-bar {
+                order: 1;
+                width: 100%;
+                margin-top: 10px;
+            }
+            .delivery-info, .home-link, .cart {
+                margin: 5px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-main">
+            <div class="logo">
+                <img src="https://deowl.co/wp-content/uploads/2020/10/FreshGrocery-logo.jpg" alt="Grocer App Logo" onerror="this.onerror=null;this.src='https://placehold.co/100x40/e2e8f0/64748b?text=Logo';">
+            </div>
+            <a href="#" class="home-link" onclick="showMainPage()">Home</a>
+            <div class="delivery-info">
+                <span>Delivering to</span>
+                <p>Jhelum</p>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="search-input" placeholder="Search products...">
+                <button id="search-button">Search</button>
+            </div>
+            <div class="cart" onclick="showCartPage()">
+                <a href="#">
+                    🛒
+                    <span id="cart-count" class="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div id="main-content">
+            <!-- Main page content will be loaded here dynamically -->
+        </div>
+
+        <div id="cart-page" class="cart-page">
+            <!-- Cart page content will be loaded here dynamically -->
+        </div>
+    </main>
+
+    <div id="message-box"></div>
+
+    <script>
+        // Data for all categories and their sub-categories
+        const allCategories = {
+            "Breakfast Essentials": {
+                data: {
+                    all: [
+                        { id: "p1", name: "Irani Carrot Jam", price: 248, oldPrice: 330, discount: "25%", image: "https://nazarjanssupermarket.com/cdn/shop/products/shana-carrot-jam-830gm-nazar-jan-s-supermarket.jpg?v=1715280041", unit: "280 gm" },
+                        { id: "p2", name: "Bisconni Brownie Cake", price: 400, oldPrice: null, discount: null, image: "https://tse3.mm.bing.net/th/id/OIP.q_Ofo_QbWNJZSeMXFStk_QHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3", unit: "1*10 unit" },
+                        { id: "p3", name: "Bisconni Coffee Cake", price: 500, oldPrice: null, discount: null, image: "https://hmhmart.pk/wp-content/uploads/2025/01/1289850-1.jpg", unit: "1X10 unit" },
+                        { id: "p4", name: "Bread (Whole Wheat)", price: 150, oldPrice: null, discount: null, image: "https://tse4.mm.bing.net/th/id/OIP.Wo29cVJCif7l_9bJYzPC5gHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3", unit: "1 unit" },
+                        { id: "p5", name: "Bread (White)", price: 150, oldPrice: null, discount: null, image: "https://pictures.grocerapps.com/original/grocerapp-dawn-bread-plain-large-725g-62761ab9a147b.jpeg", unit: "1 unit" },
+                        { id: "p6", name: "Mixed Fruit Jam", price: 280, oldPrice: null, discount: null, image: "https://tse3.mm.bing.net/th/id/OIP.9ekEjSTVOyWQA5R0Niji0gHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3", unit: "1 unit" },
+                        { id: "p7", name: "Blueband Margarine", price: 350, oldPrice: null, discount: null, image: "https://pictures.grocerapps.com/original/grocerapp-blue-band-margarine-spread-665d5231347e6.jpeg", unit: "1 unit" },
+                        { id: "p8", name: "Nutella Hazelnut Spread", price: 1200, oldPrice: null, discount: null, image: "https://cdnx.jumpseller.com/hercules-it-llc/image/17110157/Nutella.jpg?1623999446", unit: "1 unit" },
+                        { id: "p9", name: "Cake Rusk", price: 220, oldPrice: null, discount: null, image: "https://img.drz.lazcdn.com/static/pk/p/cfd075ceffe26cc668a50a623003065b.jpg_720x720q80.jpg", unit: "1 unit" },
+                    ],
+                    eggs: [
+                        { id: "p10", name: "Farm Fresh Eggs", price: 300, oldPrice: null, discount: null, image: "https://th.bing.com/th/id/R.de0758b09778c3e36df965d9f9bf3e3c?rik=Ei4teUPs2r944w&pid=ImgRaw&r=0", unit: "1 dozen" },
+                        { id: "p11", name: "Brown Eggs", price: 350, oldPrice: null, discount: null, image: "https://tse2.mm.bing.net/th/id/OIP.CMcZPLOI4Eu6CxzV-a6PqwHaFj?r=0&w=1366&h=1025&rs=1&pid=ImgDetMain&o=7&rm=3", unit: "12" },
+                        { id: "p12", name: "Jumbo Eggs", price: 400, oldPrice: null, discount: null, image: "https://tse3.mm.bing.net/th/id/OIP.tJoXkaAGhtnLGnfuSMi8igHaEf?r=0&rs=1&pid=ImgDetMain&o=7&rm=3", unit: "6" },
+                    ],
+                    cereals: [
+                        { id: "p13", name: "Kellogg's Corn Flakes", price: 550, oldPrice: null, discount: null, image: "https://tse3.mm.bing.net/th/id/OIP.SqaygGpGpJpnmaISzqssQQHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3", unit: "500 gm" },
+                        { id: "p14", name: "Quaker Oats", price: 420, oldPrice: 450, discount: "7%", image: "https://tse4.mm.bing.net/th/id/OIP.srURsY6EzEKCmS3FGwljWwHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3", unit: "1 kg" },
+                        { id: "p15", name: "Nestle Koko Krunch", price: 610, oldPrice: null, discount: null, image: "https://tse4.mm.bing.net/th/id/OIP.H9BgmG5g85JwCJSYP0SmZQHaJF?r=0&rs=1&pid=ImgDetMain&o=7&rm=3", unit: "330 gm" },
+                    ],
+                    cakes: [
+                        { id: "p16", name: "Slice Cake", price: 200, oldPrice: null, discount: null, image: "https://tse2.mm.bing.net/th/id/OIP.tztqm_IOU7omfdNOdFdPZgAAAA?r=0&rs=1&pid=ImgDetMain&o=7&rm=3", unit: "1 unit" },
+                        { id: "p17", name: "Swiss Roll", price: 250, oldPrice: null, discount: null, image: "https://tse1.mm.bing.net/th/id/OIP.5A010i2wLtGpqVhHBX7jsgHaHa?r=0&w=1400&h=1400&rs=1&pid=ImgDetMain&o=7&rm=3", unit: "1 pack" },
+                    ],
+                    "bread-crumbs": [
+                        { id: "p18", name: "Fresh Bread Crumbs", price: 120, oldPrice: null, discount: null, image: "https://tse3.mm.bing.net/th/id/OIP.I7sdOlw591TPDmzj_ehoQQHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3", unit: "200 gm" },
+                    ],
+                    honey: [
+                        { id: "p19", name: "Pure Honey", price: 800, oldPrice: null, discount: null, image: "https://lzd-img-global.slatic.net/g/p/7c6d1b242667898877e29a1d1320e726.png_720x720q80.png", unit: "500 gm" },
+                        { id: "p20", name: "Sidr Honey", price: 1500, oldPrice: 1800, discount: "17%", image: "https://tse2.mm.bing.net/th/id/OIP.Pu7JUJtkrLqRM_rW0xSN7gHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3", unit: "250 gm" },
+                    ],
+                    spreads: [
+                        { id: "p21", name: "Peanut Butter (Smooth)", price: 450, oldPrice: null, discount: null, image: "https://tse3.mm.bing.net/th/id/OIP.-4IHeBqBFumcjTg88qMB8AHaH6?r=0&rs=1&pid=ImgDetMain&o=7&rm=3", unit: "340 gm" },
+                        { id: "p22", name: "Chocolate Spread", price: 600, oldPrice: null, discount: null, image: "https://tse3.mm.bing.net/th/id/OIP.qorVyJ3_yYMnwK6C_3CTOgHaHa?r=0&w=992&h=992&rs=1&pid=ImgDetMain&o=7&rm=3", unit: "300 gm" },
+                    ],
+                    syrups: [
+                        { id: "p23", name: "Chocolate Syrup", price: 750, oldPrice: null, discount: null, image: "https://tse1.mm.bing.net/th/id/OIP.semf5azGlEAY9_Jh2F57dgHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3", unit: "250 ml" },
+                    ],
+                    "jams-marmalades": [
+                        { id: "p24", name: "Strawberry Jam", price: 270, oldPrice: 300, discount: "10%", image: "https://tse4.mm.bing.net/th/id/OIP.LKHEzLl4hlehRZpLnSY1TQAAAA?r=0&rs=1&pid=ImgDetMain&o=7&rm=3", unit: "450 gm" },
+                        { id: "p25", name: "Orange Marmalade", price: 290, oldPrice: null, discount: null, image: "https://th.bing.com/th/id/R.603a8a2f3475c1b033c21487dcaa1753?rik=H%2fAkhuBbr3xdZg&pid=ImgRaw&r=0", unit: "400 gm" },
+                    ],
+                    buns: [
+                        { id: "p26", name: "Plain Buns", price: 180, oldPrice: null, discount: null, image: "https://tse1.mm.bing.net/th/id/OIP.TZzziDh9j075EgMJPrmeZAHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3", unit: "6 pcs" },
+                    ],
+                    rusks: [
+                        { id: "p27", name: "Milk Rusk", price: 190, oldPrice: null, discount: null, image: "https://tse4.mm.bing.net/th/id/OIP.FiB6NqlRSfXPl5W_fKTU2gHaGt?r=0&rs=1&pid=ImgDetMain&o=7&rm=3", unit: "300 gm" },
+                    ],
+                }
+            },
+            "Dairy & Milk": {
+                image: "https://tse4.mm.bing.net/th/id/OIP.DAwQwKlGVMxOBf2uXUIeuQHaEq?r=0&rs=1&pid=ImgDetMain&o=7&rm=3 & Milk",
+                data: {
+                    all: [
+                        { id: "p28", name: "Olpers Milk", price: 250, oldPrice: null, discount: null, image: "https://tse4.mm.bing.net/th/id/OIP.skNdedUODR8hugW01m_B3gHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3", unit: "1.5L" },
+                        { id: "p29", name: "Nestle Milkpak", price: 240, oldPrice: null, discount: null, image: "https://tse4.mm.bing.net/th/id/OIP.qIT2iL9fRlrCSrtKuRwsxwHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3", unit: "1L" },
+                        { id: "p30", name: "Nestle Yoghurt", price: 180, oldPrice: null, discount: null, image: "https://tse4.mm.bing.net/th/id/OIP.VVntvX9bKGyRQdHawIT2nwAAAA?r=0&rs=1&pid=ImgDetMain&o=7&rm=3", unit: "1kg" },
+                        { id: "p30", name: "Prema Yoghurt", price: 180, oldPrice: null, discount: null, image: "https://pictures.grocerapps.com/original/grocerapp-prema-yogurt-5f60a47b5572f.jpeg", unit: "1kg" },
+                        { id: "p31", name: "Adam's Cheese", price: 650, oldPrice: 700, discount: "7%", image: "https://i.pinimg.com/736x/24/be/9e/24be9ea9cb40c4ab5d0c83d5a7f224ee.jpg", unit: "200gm" },
+                        { id: "p32", name: "Nur pur Butter", price: 500, oldPrice: null, discount: null, image: "https://www.faujifoods.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fnurpur-butter.ad6ff381.png&w=1080&q=75", unit: "200gm" },
+                    ],
+                    milk: [
+                        { id: "p33", name: "Olpers Milk", price: 250, oldPrice: null, discount: null, image: "https://tse4.mm.bing.net/th/id/OIP.skNdedUODR8hugW01m_B3gHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3", unit: "1.5L" },
+                        { id: "p34", name: "Nestle Milkpak", price: 240, oldPrice: null, discount: null, image: "https://tse4.mm.bing.net/th/id/OIP.qIT2iL9fRlrCSrtKuRwsxwHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3", unit: "1L" },
+                    ],
+                    cheese: [
+                        { id: "p35", name: "Adam's Cheese", price: 650, oldPrice: 700, discount: "7%", image: "https://i.pinimg.com/736x/24/be/9e/24be9ea9cb40c4ab5d0c83d5a7f224ee.jpg", unit: "200gm" },
+                        { id: "p36", name: "Dairy Omung", price: 350, oldPrice: null, discount: null, image: "https://pictures.grocerapps.com/original/grocerapp-dairy-omung-low-fat-milk-61b202cabab7c.jpeg", unit: "200gm" },
+                    ],
+                    yogurt: [
+                        { id: "p30", name: "Nestle Yoghurt", price: 180, oldPrice: null, discount: null, image: "https://tse4.mm.bing.net/th/id/OIP.VVntvX9bKGyRQdHawIT2nwAAAA?r=0&rs=1&pid=ImgDetMain&o=7&rm=3", unit: "1kg" },
+                        { id: "p30", name: "Prema Yoghurt", price: 180, oldPrice: null, discount: null, image: "https://pictures.grocerapps.com/original/grocerapp-prema-yogurt-5f60a47b5572f.jpeg", unit: "1kg" },
+                    ],
+                    butter: [
+                        { id: "p32", name: "Nur pur Butter", price: 500, oldPrice: null, discount: null, image: "https://www.faujifoods.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fnurpur-butter.ad6ff381.png&w=1080&q=75", unit: "200gm" },
+                        { id: "p39", name: "Blue Band Butter", price: 350, oldPrice: null, discount: null, image: "https://pictures.grocerapps.com/original/grocerapp-blue-band-margarine-spread-665d5231347e6.jpeg", unit: "1 unit" },
+                    ],
+                }
+            },
+            "Fruits & Vegetables": {
+                image: "https://tse2.mm.bing.net/th/id/OIP.gKnelTVG63_a-4s0x8gPJQHaE8?r=0&w=600&h=400&rs=1&pid=ImgDetMain&o=7&rm=3",
+                data: {
+                    all: [
+                        { id: "p40", name: "Apples (Red)", price: 350, oldPrice: null, discount: null, image: "https://jagsfresh-bucket.s3.amazonaws.com/media/package/img_one/2021-01-15/Red_Delicious_Apple_Pack.jpg", unit: "1kg" },
+                        { id: "p41", name: "Bananas", price: 180, oldPrice: null, discount: null, image: "https://tse3.mm.bing.net/th/id/OIP.G0UWsHzuB2Pn3n7fzzN5iwHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3", unit: "1 dozen" },
+                        { id: "p42", name: "Potatoes", price: 90, oldPrice: null, discount: null, image: "https://tse3.mm.bing.net/th/id/OIP.Lx29J6mewNu9CSfws-R0RAHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3", unit: "1kg" },
+                        { id: "p43", name: "Onions", price: 120, oldPrice: null, discount: null, image: "https://tse1.mm.bing.net/th/id/OIP.i_ybheRmIt9skABtCwTaxQHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3", unit: "1kg" },
+                    ],
+                    "fresh-fruits": [
+                        { id: "p40", name: "Apples (Red)", price: 350, oldPrice: null, discount: null, image: "https://jagsfresh-bucket.s3.amazonaws.com/media/package/img_one/2021-01-15/Red_Delicious_Apple_Pack.jpg", unit: "1kg" },
+                        { id: "p41", name: "Bananas", price: 180, oldPrice: null, discount: null, image: "https://tse3.mm.bing.net/th/id/OIP.G0UWsHzuB2Pn3n7fzzN5iwHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3", unit: "1 dozen" },
+                        { id: "p46", name: "Oranges", price: 200, oldPrice: null, discount: null, image: "https://m.media-amazon.com/images/I/71lk2KT22lS._AC_UL960_QL65_.jpg", unit: "1 dozen" },
+                    ],
+                    vegetables: [
+                        { id: "p42", name: "Potatoes", price: 90, oldPrice: null, discount: null, image: "https://tse3.mm.bing.net/th/id/OIP.Lx29J6mewNu9CSfws-R0RAHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3", unit: "1kg" },
+                        { id: "p43", name: "Onions", price: 120, oldPrice: null, discount: null, image: "https://tse1.mm.bing.net/th/id/OIP.i_ybheRmIt9skABtCwTaxQHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3", unit: "1kg" },
+                        { id: "p49", name: "Tomatoes", price: 150, oldPrice: 170, discount: "12%", image: "https://img.freepik.com/premium-photo/cherry-tomatoes-package_222237-1019.jpg", unit: "1kg" },
+                    ]
+                }
+            },
+            "Meat & Seafood": {
+                image: "https://via.placeholder.com/80x80?text=Meat & Seafood",
+                data: {
+                    all: [
+                        { id: "p50", name: "Chicken Breast", price: 600, oldPrice: null, discount: null, image: "https://th.bing.com/th/id/R.3d2b717a1ec4af15ec81cb1723bc58a8?rik=qZXIm2QG%2f0v9WQ&pid=ImgRaw&r=0", unit: "1kg" },
+                        { id: "p51", name: "Mutton Leg", price: 1800, oldPrice: null, discount: null, image: "https://tse2.mm.bing.net/th/id/OIP.EHVV9A95HI3YsbEeIMqmDgHaEo?r=0&rs=1&pid=ImgDetMain&o=7&rm=3", unit: "1kg" },
+                        { id: "p52", name: "Tilapia Fish", price: 950, oldPrice: null, discount: null, image: "https://tse1.mm.bing.net/th/id/OIP.vTxgAHTRxIyneJIGv29wlQAAAA?r=0&w=390&h=280&rs=1&pid=ImgDetMain&o=7&rm=3", unit: "500gm" },
+                    ],
+                    chicken: [
+                        { id: "p53", name: "Chicken Breast", price: 600, oldPrice: null, discount: null, image: "https://www.momswhothink.com/wp-content/uploads/2023/05/shutterstock-1915431781-huge-licensed-scaled.jpg", unit: "1kg" },
+                        { id: "p54", name: "Chicken Thighs", price: 550, oldPrice: null, discount: null, image: "https://c8.alamy.com/comp/2BKDJ7X/raw-and-uncooked-chicken-thighs-in-a-yellow-plastic-container-meat-of-poultry-in-tray-isolated-on-white-background-2BKDJ7X.jpg", unit: "1kg" },
+                    ],
+                    mutton: [
+                        { id: "p55", name: "Mutton Leg", price: 1800, oldPrice: null, discount: null, image: "https://th.bing.com/th/id/OIP.gXf691q5s2QyXj0B5d1vFwHaE8?rs=1&pid=ImgDetMain", unit: "1kg" },
+                        { id: "p56", name: "Mutton Chops", price: 2100, oldPrice: null, discount: null, image: "https://th.bing.com/th/id/OIP.9J4j6Z_2j-4l7L5K_5jJ6wHaE8?rs=1&pid=ImgDetMain", unit: "1kg" },
+                    ],
+                    seafood: [
+                        { id: "p57", name: "Tilapia Fish", price: 950, oldPrice: null, discount: null, image: "https://th.bing.com/th/id/OIP.Yt0jC4z-iV6Bw-6K0kE6ugHaE8?rs=1&pid=ImgDetMain", unit: "500gm" },
+                        { id: "p58", name: "Prawns", price: 1500, oldPrice: 1700, discount: "12%", image: "https://th.bing.com/th/id/OIP.N2qf4b4r-Q-Xq1u4t-6-oQHaE8?rs=1&pid=ImgDetMain", unit: "500gm" },
+                    ]
+                }
+            },
+            "Oil, Ghee & Masala": {
+                image: "https://via.placeholder.com/80x80?text=Oils & Spices",
+                data: {
+                    all: [
+                        { id: "p59", name: "Dalda Cooking Oil", price: 900, oldPrice: null, discount: null, image: "https://th.bing.com/th/id/OIP.J0S-Fh7vL6D6Y6y3g1C3GgHaHa?rs=1&pid=ImgDetMain", unit: "1L" },
+                        { id: "p60", name: "Habib Banaspati Ghee", price: 850, oldPrice: 900, discount: "5%", image: "https://th.bing.com/th/id/OIP.6Qz7c1d-1u_5r_n-u7Wv2QHaHa?rs=1&pid=ImgDetMain", unit: "1kg" },
+                        { id: "p61", name: "Shan Chicken Biryani Masala", price: 150, oldPrice: null, discount: null, image: "https://th.bing.com/th/id/OIP.28lIuWj4yYh1c4l7Mv95bAHaHa?rs=1&pid=ImgDetMain", unit: "50gm" },
+                    ],
+                    "cooking-oil": [
+                        { id: "p62", name: "Dalda Cooking Oil", price: 900, oldPrice: null, discount: null, image: "https://th.bing.com/th/id/OIP.J0S-Fh7vL6D6Y6y3g1C3GgHaHa?rs=1&pid=ImgDetMain", unit: "1L" },
+                        { id: "p63", name: "Sundrop Oil", price: 950, oldPrice: null, discount: null, image: "https://th.bing.com/th/id/OIP.R6f3u7zX-j8-t1S91mC-tQHaHa?rs=1&pid=ImgDetMain", unit: "1L" },
+                    ],
+                    ghee: [
+                        { id: "p64", name: "Habib Banaspati Ghee", price: 850, oldPrice: 900, discount: "5%", image: "https://th.bing.com/th/id/OIP.6Qz7c1d-1u_5r_n-u7Wv2QHaHa?rs=1&pid=ImgDetMain", unit: "1kg" },
+                        { id: "p65", name: "Eva Ghee", price: 820, oldPrice: null, discount: null, image: "https://th.bing.com/th/id/OIP.z-q3fT8e-E4q8k9w2xJ5YgHaHa?rs=1&pid=ImgDetMain", unit: "1kg" },
+                    ],
+                    spices: [
+                        { id: "p66", name: "Shan Chicken Biryani Masala", price: 150, oldPrice: null, discount: null, image: "https://th.bing.com/th/id/OIP.28lIuWj4yYh1c4l7Mv95bAHaHa?rs=1&pid=ImgDetMain", unit: "50gm" },
+                        { id: "p67", name: "National Turmeric Powder", price: 80, oldPrice: null, discount: null, image: "https://th.bing.com/th/id/OIP.Ff9r7r_c7-g2nBf1E-23cAHaHa?rs=1&pid=ImgDetMain", unit: "100gm" },
+                    ]
+                }
+            }
+        };
+        
+        const mainContent = document.getElementById('main-content');
+        const cartPage = document.getElementById('cart-page');
+        const searchInput = document.getElementById('search-input');
+        const searchButton = document.getElementById('search-button');
+
+        // Global variables for cart functionality
+        let cart = [];
+        let cartCountElement;
+        
+        // This function updates the cart counter in the header
+        function updateCartDisplay() {
+            if (!cartCountElement) {
+                cartCountElement = document.getElementById('cart-count');
+            }
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+            cartCountElement.textContent = totalItems;
+        }
+
+        // This function adds a product to the cart
+        function addToCart(product) {
+            const existingItem = cart.find(item => item.id === product.id);
+            if (existingItem) {
+                existingItem.quantity++;
+            } else {
+                cart.push({ ...product, quantity: 1 });
+            }
+            updateCartDisplay();
+            showCustomMessage(`${product.name} has been added to your cart!`);
+        }
+
+        // This function updates the quantity of an item
+        function updateQuantity(id, change) {
+            const item = cart.find(item => item.id === id);
+            if (item) {
+                item.quantity += change;
+                if (item.quantity <= 0) {
+                    removeItem(id);
+                }
+            }
+            showCartPage();
+            updateCartDisplay();
+        }
+
+        // This function removes an item from the cart
+        function removeItem(id) {
+            cart = cart.filter(item => item.id !== id);
+            showCartPage();
+            updateCartDisplay();
+        }
+
+        // This function displays a custom message box
+        function showCustomMessage(message) {
+            const messageBox = document.getElementById('message-box');
+            messageBox.textContent = message;
+            messageBox.classList.add('show');
+            setTimeout(() => {
+                messageBox.classList.remove('show');
+            }, 3000);
+        }
+
+        // This function displays the products for a given sub-category
+        function displayProducts(products, parentTitle, subCategoryTitle) {
+            mainContent.innerHTML = '';
+            
+            const productPageContent = document.createElement('div');
+            productPageContent.classList.add('category-page');
+
+            const breadcrumb = document.createElement('p');
+            breadcrumb.classList.add('breadcrumb');
+            let breadcrumbHtml = `
+                <a href="#" onclick="goBackToSubcategoryPage('${parentTitle}')">
+                    <i class="fas fa-arrow-left back-arrow"></i>
+                </a>
+                <a href="#" onclick="showMainPage()">Home</a> > <a href="#" onclick="showMainPage()">Categories</a> > <a href="#" onclick="goBackToSubcategoryPage('${parentTitle}')">${parentTitle}</a> > ${subCategoryTitle}
+            `;
+            breadcrumb.innerHTML = breadcrumbHtml;
+            productPageContent.appendChild(breadcrumb);
+            
+            const sectionTitle = document.createElement('h2');
+            sectionTitle.textContent = subCategoryTitle;
+            productPageContent.appendChild(sectionTitle);
+            
+            if (products.length === 0) {
+                const noResults = document.createElement('p');
+                noResults.classList.add('no-results');
+                noResults.textContent = "No products found in this category.";
+                productPageContent.appendChild(noResults);
+            } else {
+                const productsGrid = document.createElement('div');
+                productsGrid.classList.add('products-grid');
+
+                products.forEach(product => {
+                    const productCard = document.createElement('div');
+                    productCard.classList.add('product-card');
+                    
+                    let priceHtml = `<p class="product-price">Rs. ${product.price}</p>`;
+                    if (product.oldPrice) {
+                        priceHtml = `
+                            <p class="product-price">Rs. ${product.price} 
+                                <span class="old-price">Rs. ${product.oldPrice}</span> 
+                                <span class="discount">${product.discount} OFF</span>
+                            </p>
+                        `;
+                    }
+                    
+                    productCard.innerHTML = `
+                        <img src="${product.image}" alt="${product.name}" onerror="this.onerror=null;this.src='https://placehold.co/150x150/e2e8f0/64748b?text=Image+Not+Found';">
+                        <p class="product-title">${product.name}</p>
+                        <p class="product-unit">${product.unit}</p>
+                        ${priceHtml}
+                        <button class="add-to-cart-btn">Add to Cart</button>
+                    `;
+                    
+                    const addToCartButton = productCard.querySelector('.add-to-cart-btn');
+                    addToCartButton.addEventListener('click', () => {
+                        addToCart(product);
+                    });
+
+                    productsGrid.appendChild(productCard);
+                });
+                
+                productPageContent.appendChild(productsGrid);
+            }
+            
+            mainContent.appendChild(productPageContent);
+            
+            mainContent.style.display = 'block';
+            cartPage.style.display = 'none';
+        }
+
+        // This function displays the sub-category buttons for a main category
+        function displayCategoryPage(categoryData, title) {
+            mainContent.innerHTML = '';
+
+            const categoryPageContent = document.createElement('div');
+            categoryPageContent.classList.add('category-page');
+
+            const breadcrumb = document.createElement('p');
+            breadcrumb.classList.add('breadcrumb');
+            breadcrumb.innerHTML = `
+                <a href="#" onclick="showMainPage()">
+                    <i class="fas fa-arrow-left back-arrow"></i>
+                </a>
+                <a href="#" onclick="showMainPage()">Home</a> > <a href="#" onclick="showMainPage()">Categories</a> > ${title}
+            `;
+            categoryPageContent.appendChild(breadcrumb);
+
+            const sectionTitle = document.createElement('h2');
+            sectionTitle.textContent = title;
+            categoryPageContent.appendChild(sectionTitle);
+            
+            const subCategoriesContainer = document.createElement('div');
+            subCategoriesContainer.classList.add('sub-categories');
+
+            const buttons = [];
+
+            for (const key in categoryData.data) {
+                const button = document.createElement('button');
+                button.classList.add('sub-category-btn');
+                button.textContent = key.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+                
+                const currentProducts = categoryData.data[key];
+                
+                button.addEventListener('click', () => {
+                    buttons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    displayProducts(currentProducts, title, button.textContent);
+                });
+                
+                subCategoriesContainer.appendChild(button);
+                buttons.push(button);
+            }
+
+            if (buttons.length > 0) {
+                buttons[0].classList.add('active');
+            }
+
+            categoryPageContent.appendChild(subCategoriesContainer);
+            
+            // Display the 'All' products by default
+            displayProducts(categoryData.data.all, title, "All");
+            
+            mainContent.innerHTML = '';
+            mainContent.appendChild(categoryPageContent);
+
+            mainContent.style.display = 'block';
+            cartPage.style.display = 'none';
+        }
+        
+        function goBackToSubcategoryPage(title) {
+            const categoryData = allCategories[title];
+            if (categoryData) {
+                displayCategoryPage(categoryData, title);
+            }
+        }
+
+        // --- NEW SEARCH FUNCTIONALITY ---
+        function getFlattenedProducts() {
+            let allProducts = [];
+            for (const category in allCategories) {
+                const subCategories = allCategories[category].data;
+                for (const subCat in subCategories) {
+                    allProducts = allProducts.concat(subCategories[subCat]);
+                }
+            }
+            return allProducts;
+        }
+
+        function handleSearch() {
+            const query = searchInput.value.toLowerCase().trim();
+            if (query === "") {
+                showMainPage();
+                return;
+            }
+
+            const allProducts = getFlattenedProducts();
+            const searchResults = allProducts.filter(product => {
+                const productName = product.name.toLowerCase();
+                return productName.includes(query);
+            });
+            
+            displaySearchResults(searchResults, query);
+        }
+
+        function displaySearchResults(products, query) {
+            mainContent.innerHTML = '';
+
+            const searchPageContent = document.createElement('div');
+            searchPageContent.classList.add('category-page');
+
+            const breadcrumb = document.createElement('p');
+            breadcrumb.classList.add('breadcrumb');
+            breadcrumb.innerHTML = `
+                <a href="#" onclick="showMainPage()">
+                    <i class="fas fa-arrow-left back-arrow"></i>
+                </a>
+                <a href="#" onclick="showMainPage()">Home</a> > Search Results
+            `;
+            searchPageContent.appendChild(breadcrumb);
+
+            const sectionTitle = document.createElement('h2');
+            sectionTitle.textContent = `Search Results for "${query}"`;
+            searchPageContent.appendChild(sectionTitle);
+            
+            if (products.length === 0) {
+                const noResults = document.createElement('p');
+                noResults.classList.add('no-results');
+                noResults.textContent = `No products found for "${query}".`;
+                searchPageContent.appendChild(noResults);
+            } else {
+                const productsGrid = document.createElement('div');
+                productsGrid.classList.add('products-grid');
+
+                const uniqueProductIds = new Set();
+                products.forEach(product => {
+                    // Prevent duplicate products in search results
+                    if (!uniqueProductIds.has(product.id)) {
+                        const productCard = document.createElement('div');
+                        productCard.classList.add('product-card');
+                        
+                        let priceHtml = `<p class="product-price">Rs. ${product.price}</p>`;
+                        if (product.oldPrice) {
+                            priceHtml = `
+                                <p class="product-price">Rs. ${product.price} 
+                                    <span class="old-price">Rs. ${product.oldPrice}</span> 
+                                    <span class="discount">${product.discount} OFF</span>
+                                </p>
+                            `;
+                        }
+                        
+                        productCard.innerHTML = `
+                            <img src="${product.image}" alt="${product.name}" onerror="this.onerror=null;this.src='https://placehold.co/150x150/e2e8f0/64748b?text=Image+Not+Found';">
+                            <p class="product-title">${product.name}</p>
+                            <p class="product-unit">${product.unit}</p>
+                            ${priceHtml}
+                            <button class="add-to-cart-btn">Add to Cart</button>
+                        `;
+                        
+                        const addToCartButton = productCard.querySelector('.add-to-cart-btn');
+                        addToCartButton.addEventListener('click', () => {
+                            addToCart(product);
+                        });
+                        
+                        productsGrid.appendChild(productCard);
+                        uniqueProductIds.add(product.id);
+                    }
+                });
+                searchPageContent.appendChild(productsGrid);
+            }
+            
+            mainContent.appendChild(searchPageContent);
+            mainContent.style.display = 'block';
+            cartPage.style.display = 'none';
+        }
+
+        // Event listeners for the search bar
+        searchButton.addEventListener('click', handleSearch);
+        searchInput.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                handleSearch();
+            }
+        });
+
+        // This function will show the original main page content
+        function showMainPage() {
+            const originalContent = `
+                <section class="categories">
+                    <h2>Categories</h2>
+                    <div class="categories-grid">
+                        <div class="category-item" id="breakfast-category"> 
+                            <img src="https://i.pinimg.com/originals/87/8c/d4/878cd4acd3b3e1def65943ca578e671a.jpg" alt="Breakfast Essentials" onerror="this.onerror=null;this.src='https://placehold.co/100x100/e2e8f0/64748b?text=Breakfast';">
+                            <p>Breakfast Essentials</p>
+                        </div>
+                        <div class="category-item" id="dairy-category">
+                            <img src="https://tse4.mm.bing.net/th/id/OIP.DAwQwKlGVMxOBf2uXUIeuQHaEq?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Dairy & Milk" onerror="this.onerror=null;this.src='https://placehold.co/100x100/e2e8f0/64748b?text=Dairy';">
+                            <p>Milk & Dairy</p>
+                        </div>
+                        <div class="category-item" id="fruits-category">
+                            <img src="https://tse2.mm.bing.net/th/id/OIP.gKnelTVG63_a-4s0x8gPJQHaE8?r=0&w=600&h=400&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Fruits & Vegetables" onerror="this.onerror=null;this.src='https://placehold.co/100x100/e2e8f0/64748b?text=Fruits';">
+                            <p>Fruits & Vegetables</p>
+                        </div>
+                        <div class="category-item" id="meat-category">
+                            <img src="https://tse4.mm.bing.net/th/id/OIP.rMhCmNAk_wCWD-wPUSvcbAHaE8?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Meat & Seafood" onerror="this.onerror=null;this.src='https://placehold.co/100x100/e2e8f0/64748b?text=Meat';">
+                            <p>Meat & Seafood</p>
+                        </div>
+                        <div class="category-item" id="oils-category">
+                            <img src="https://tse1.mm.bing.net/th/id/OIP.x_RPFHY3x-HHED-YQNTlswHaH5?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" onerror="this.onerror=null;this.src='https://placehold.co/100x100/e2e8f0/64748b?text=Oils';">
+                            <p>Oil, Ghee & Masala</p>
+                        </div>
+                    </div>
+                </section>
+                <section class="top-sellers">
+                    <h2>Top Sellers</h2>
+                    <div class="products-grid">
+                        <!-- Top seller products will be rendered here dynamically -->
+                        <div class="product-card">
+                            <img src="https://tse4.mm.bing.net/th/id/OIP.Ra2kspjO1rqcY13vM5GyJgHaJk?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Sasso Olive Oil" onerror="this.onerror=null;this.src='https://placehold.co/150x150/e2e8f0/64748b?text=Sasso+Olive+Oil';">
+                            <p class="product-title">Sasso Olive Oil 250ml Bott...</p>
+                            <p class="product-price">Rs. 2400</p>
+                            <button class="add-to-cart-btn" onclick="addToCart({id: 'p99', name: 'Sasso Olive Oil', price: 2400, image: 'https://via.placeholder.com/150x150?text=Sasso+Olive+Oil', unit: '250ml'})">Add to Cart</button>
+                        </div>
+                        
+                        <div class="product-card">
+                            <img src="https://i.pinimg.com/736x/0b/b5/27/0bb527274d10e4cf352063639b87b626.jpg" alt="Fish Biscuits" onerror="this.onerror=null;this.src='https://placehold.co/150x150/e2e8f0/64748b?text=Fish+Biscuits';">
+                            <p class="product-title">Fish Biscuits (Crumbs)</p>
+                            <p class="product-price">Rs. 450</p>
+                            <button class="add-to-cart-btn" onclick="addToCart({id: 'p101', name: 'Fish Biscuits (Crumbs)', price: 450, image: 'https://via.placeholder.com/150x150?text=Fish+Biscuits', unit: '1 pack'})">Add to Cart</button>
+                        </div>
+                    </div>
+                </section>
+            `;
+            mainContent.innerHTML = originalContent;
+
+            // Add event listeners for all main categories
+            document.getElementById('breakfast-category').addEventListener('click', () => {
+                displayCategoryPage(allCategories["Breakfast Essentials"], "Breakfast Essentials");
+            });
+            document.getElementById('dairy-category').addEventListener('click', () => {
+                displayCategoryPage(allCategories["Dairy & Milk"], "Dairy & Milk");
+            });
+            document.getElementById('fruits-category').addEventListener('click', () => {
+                displayCategoryPage(allCategories["Fruits & Vegetables"], "Fruits & Vegetables");
+            });
+            document.getElementById('meat-category').addEventListener('click', () => {
+                displayCategoryPage(allCategories["Meat & Seafood"], "Meat & Seafood");
+            });
+            document.getElementById('oils-category').addEventListener('click', () => {
+                displayCategoryPage(allCategories["Oil, Ghee & Masala"], "Oil, Ghee & Masala");
+            });
+            
+            mainContent.style.display = 'block';
+            cartPage.style.display = 'none';
+        }
+
+        function showCartPage() {
+            mainContent.style.display = 'none';
+            cartPage.style.display = 'block';
+            
+            let cartItemsHtml = '';
+            let cartTotal = 0;
+            
+            if (cart.length === 0) {
+                cartItemsHtml = '<p style="text-align: center;">Your cart is empty!</p>';
+            } else {
+                cartItemsHtml += `<ul class="cart-list">`;
+                cart.forEach(item => {
+                    const itemTotal = item.price * item.quantity;
+                    cartTotal += itemTotal;
+                    cartItemsHtml += `
+                        <li class="cart-item">
+                            <div class="item-details">
+                                <img src="${item.image}" alt="${item.name}" onerror="this.onerror=null;this.src='https://placehold.co/80x80/e2e8f0/64748b?text=Image+Not+Found';">
+                                <div class="item-info">
+                                    <p>${item.name}</p>
+                                    <span>Rs. ${item.price.toFixed(2)} / ${item.unit}</span>
+                                </div>
+                            </div>
+                            <div class="quantity-controls">
+                                <button onclick="updateQuantity('${item.id}', -1)">-</button>
+                                <span>${item.quantity}</span>
+                                <button onclick="updateQuantity('${item.id}', 1)">+</button>
+                            </div>
+                            <span class="item-total">Rs. ${itemTotal.toFixed(2)}</span>
+                            <button class="remove-btn" onclick="removeItem('${item.id}')">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </li>
+                    `;
+                });
+                cartItemsHtml += `</ul>`;
+            }
+
+            const cartPageContent = document.createElement('div');
+            cartPageContent.classList.add('cart-page-content');
+            cartPageContent.innerHTML = `
+                <h2>Your Shopping Cart</h2>
+                ${cartItemsHtml}
+                <div class="cart-summary">
+                    <p>Total: Rs. ${cartTotal.toFixed(2)}</p>
+                    <button>Proceed to Checkout</button>
+                </div>
+            `;
+            cartPage.innerHTML = '';
+            cartPage.appendChild(cartPageContent);
+        }
+
+        // Initialize the app by showing the main page on load
+        window.onload = showMainPage;
+
+    </script>
+</body>
+</html>
